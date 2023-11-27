@@ -1,0 +1,44 @@
+body{
+    background-color: black;
+}
+
+h1{
+    color: orange;
+    text-align: center;
+}
+
+h3,p, #sonTwo,#sonOne{
+    color: white;
+    text-align: center;
+}
+
+#sonTwo,#sonOne {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#sonTwo,#sonOne span {
+    font-size: 20px;
+}
+
+#father {
+    display: flex;
+    flex-direction: row;
+    padding-left: 400px;
+}
+
+#sonOne {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#sonTwo {
+    padding: 5px;
+}
+
+.fox {
+    font-weight: bold;
+}
