@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query Quest</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+    <h1>Detective gets a call from the Police chief
+
+    </h1>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+        <div >
+            <div >
+                <img id="image2" src="det.png" alt="">
+                <img id="image4" src="text1.png" alt="">
+                <img id="image5" src="text2.png" alt="">
+
+                <img id="image3" src="police.png" alt="">
+
+            </div>
+        </div>
+
+            <button id="play">
+                Play
+            </button>
+</body>
+
+
+<script>
+    function showButton() {
+      document.getElementById('play').style.display = 'block';
+      document.getElementById('image4').style.display = 'inline-block';
+      document.getElementById('image5').style.display = 'inline-block';
+
+    }
+    function showImage4() {
+      document.getElementById('image4').style.display = 'inline-block';
+    }
+    function showImage5() {
+        document.getElementById('image5').style.display = 'inline-block';
+    }
+    setTimeout(showImage5, 3000);
+
+    setTimeout(showImage4, 6000);
+
+    setTimeout(showButton, 7000);
+
+</script>
+</html>

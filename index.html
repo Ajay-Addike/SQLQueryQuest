@@ -8,20 +8,27 @@
 </head>
 <body>
     <h1>Welcome to Query Quest</h1>
-    <h3>Query your wat to victory</h3>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <h3>Query your way to victory</h3>
 
-    <div id="father">
-        <div id="sonOne">
+
+    <div class="messageBox">
             <span>a casual game where players learn and practice SQL by solving puzzles. </span>
             <span>In the game, players take on the role of a detective tasked with solving </span> 
             <span>a series of mysteries by querying a database. succeed, players must use </span>  
             <span>their SQL skills to find clues, uncover hidden information, and identify .</span> 
             <span>patterns.</span>
-        </div>
     </div>
+    <a class="button" href="page2.html">PLAY</a>
+        
+    
 </body>
+
+<script>
+    function showButton() {
+      document.getElementById('play').style.display = 'block';
+    }
+
+    // Set a timeout to call the showButton function after 5 seconds
+    setTimeout(showButton, 7000);
+</script>
 </html>

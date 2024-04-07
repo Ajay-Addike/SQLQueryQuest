@@ -7,38 +7,76 @@ h1{
     text-align: center;
 }
 
-h3,p, #sonTwo,#sonOne{
+h3,p{
     color: white;
     text-align: center;
 }
 
-#sonTwo,#sonOne {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
 
-#sonTwo,#sonOne span {
-    font-size: 20px;
-}
 
-#father {
-    display: flex;
-    flex-direction: row;
-    padding-left: 400px;
-}
 
-#sonOne {
+.messageBox {
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* padding-left: 400px; */
+    margin: 30px;
+    padding: 20px;
     border: 2px solid white;
+    color: white;
+    font-size: 25px;
+}
+
+
+
+
+
+
+.button{
+    display: block;
+    width: 80px;
+    text-align: center;
+    font-size: 20px;
+    padding: 12px 30px;
+    text-decoration: none;
+    background-color: #eee;
+    color: black;
+    border-radius: 10px;
+    margin:0 auto;
+    user-select: none; /* Standard syntax */
+}
+
+.button:hover{
+    background-color: #aaa;
+
+}
+
+#image1, #image2, #image3{
+    width: 300px;
+    height: 300px;
+}
+#image1{
+    margin-left: calc(100% - 60%);
+}
+#image2{
+    margin-left: calc(100% - 80%);
+    display: inline-block;
+}
+#image3{
+    margin-left: calc(100% - 40%);
+    display: inline-block;
+
+}
+#image4, #image5{
+    display: none;
+    width: 300px;
+    height: 300px;
+}
+
+#comicBox {
+    /* display: none; */
+    border: 2px solid #333;
+    padding: 10px;
+    margin: 20px;
     border-radius: 5px;
-    padding: 5px;
-}
-
-#sonTwo {
-    padding: 5px;
-}
-
-.fox {
-    font-weight: bold;
-}
+    background-color: #f8f8f8;
+  }
