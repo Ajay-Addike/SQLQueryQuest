@@ -26,7 +26,9 @@ function next1(){
         <div class="col-md-6">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    
+                <h5 class="card-title">Question 2:</h5>
+                <p>Clue: we know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax city</p>
+                <button class="btn btn-primary" onclick="Question2()">Go to Question</button>
                 </div>
             </div>
         </div>
@@ -93,12 +95,22 @@ window.query1 = function(){
 };
 
 
-
+function displayError(errorMessage) {
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> ${errorMessage}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    `;
+}
 function query(sql, cb, err_cb) {
     if (err_cb) {
         worker.onerror = e => err_cb(e);
     } else {
-        worker.onerror = e => { throw new Error(e.message); }
+        worker.onerror = e => { throw new Error(displayError(e.message)); }
     }
 
     worker.onmessage = event => {
@@ -111,17 +123,7 @@ function query(sql, cb, err_cb) {
     });
 }
 
-function displayError(errorMessage) {
-    const errorContainer = document.getElementById('errorContainer');
-    errorContainer.innerHTML = `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error:</strong> ${errorMessage}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    `;
-}
+
 function clearError() {
     const errorContainer = document.getElementById('errorContainer');
     errorContainer.innerHTML = '';
