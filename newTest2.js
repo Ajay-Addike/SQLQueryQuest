@@ -240,11 +240,11 @@ function executeQuery1() {
         const sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown}`;
       
         querySuccess = sqlQuery;
-        // console.log(query1);
+        console.log(sqlQuery);
         query(sqlQuery, function (result) {
             displayResults(result);
             clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
+            displaySuccess('Query executed successfully', 'successContainer1');
             
             document.getElementById("next").disabled = false;
 
@@ -279,6 +279,10 @@ function Next1(){
     // document.getElementById("QuizCard8").style.display = "none";
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
+
 }
 
 // ********************QUESTION 2*************************************************
@@ -307,6 +311,9 @@ function Question2(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 function executeQuery2() {
@@ -337,8 +344,10 @@ function executeQuery2() {
             console.log(result);
             displayResults(result);
             clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
+            displaySuccess('Query executed successfully', 'successContainer2');
             document.getElementById("next").disabled = false;
+            document.getElementById("outputContainer").style.display = "block";
+            document.getElementById("gridPagination").style.display = "block";
 
         }, function (error) {
             displayError('Sorry, wrong answer');
@@ -372,6 +381,9 @@ function Next2(){
     // document.getElementById("QuizCard8").style.display = "none";
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 // *********QUESTION 3**************
@@ -401,6 +413,9 @@ function Question3(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 function executeQuery3() {
@@ -430,8 +445,10 @@ function executeQuery3() {
         query(sqlQuery, function (result) {
             displayResults(result);
             clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
+            displaySuccess('Query executed successfully', 'successContainer3');
             document.getElementById("next").disabled = false;
+            document.getElementById("outputContainer").style.display = "block";
+            document.getElementById("gridPagination").style.display = "block";
 
         }, function (error) {
             displayError('Sorry, wrong answer');
@@ -466,6 +483,9 @@ function Next3(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 // *********QUESTION 4**************
@@ -495,6 +515,9 @@ function Question4(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 function executeQuery4() {
@@ -527,8 +550,10 @@ function executeQuery4() {
         query(sqlQuery, function (result) {
             displayResults(result);
             clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
+            displaySuccess('Query executed successfully', 'successContainer4');
             document.getElementById("next").disabled = false;
+            document.getElementById("outputContainer").style.display = "block";
+            document.getElementById("gridPagination").style.display = "block";
 
         }, function (error) {
             displayError('Sorry, wrong answer');
@@ -563,6 +588,9 @@ function Next4(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 
@@ -593,6 +621,9 @@ function Question5(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 function executeQuery5() {
@@ -629,8 +660,10 @@ function executeQuery5() {
         query(sqlQuery, function (result) {
             displayResults(result);
             clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
+            displaySuccess('Query executed successfully', 'successContainer5');
             document.getElementById("next").disabled = false;
+            document.getElementById("outputContainer").style.display = "block";
+            document.getElementById("gridPagination").style.display = "block";
 
         }, function (error) {
             displayError('Sorry, wrong answer');
@@ -665,6 +698,9 @@ function Next5(){
 
 
     document.getElementById("startQuizCard").style.display = "none";
+
+    document.getElementById("outputContainer").style.display = "none";
+    document.getElementById("gridPagination").style.display = "none";
 }
 
 
