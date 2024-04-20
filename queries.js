@@ -59,7 +59,7 @@ window.query1 = function(){
 
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-success" onclick="executeQuery1()">Run!</button>
-                        <button onclick="Next1()" id="next" class="btn btn-primary">Next Question</button>
+                        <button  id="next" class="btn btn-primary">Next Question</button>
                     </div>
                     <div class="row mt-3">
                     <div id="errorContainer"></div>
