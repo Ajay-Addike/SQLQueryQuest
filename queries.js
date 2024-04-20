@@ -136,8 +136,8 @@ function displayResults(results) {
     }
     tableHTML += "</tbody></table>";
 
-    var recordsInfo = `Showing ${startIndex + 1}-${endIndex} of ${results[0].values.length} records`;
-    tableHTML += `<div>${recordsInfo}</div>`;
+    // var recordsInfo = `Showing ${startIndex + 1}-${endIndex} of ${results[0].values.length} records`;
+    // tableHTML += `<div>${recordsInfo}</div>`;
     console.log(tableHTML)
     document.getElementById("outputContainer").innerHTML = tableHTML;
 
