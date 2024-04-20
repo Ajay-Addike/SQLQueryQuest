@@ -30,7 +30,9 @@ window.loadStoryPage = function() {
                         <p id="demo" data-text="Adrian Bell, CTO of a large technology company was found to be missing after a Gala event on April 1st, 2023, prompting an urgent police investigation. As a Detective You are given access to the crime reports and other related databases to find the culprit."></p>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-danger" onclick="loadHomePage()">Go Back</button>
-                            <button type="button" class="btn btn-success" onclick="loadHomePage()">Go!</button>
+                            <button type="button" class="btn btn-success" >
+                            <a href="queries.html">GO!</a>
+                            </button>
                         </div>
                     </div>
                 </div>
