@@ -1,0 +1,19 @@
+body{
+    background-color: white;
+}
+.navbar-brand
+{
+    font-size: 30px;
+}
+.card-header{
+    text-align: center;
+    font-size: 30px;
+}
+.card-text{
+    text-align: justify;
+    font-size: 25px;
+}
+.navbar {
+
+	border-radius: 0px;
+}

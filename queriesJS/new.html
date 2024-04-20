@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Query Quest</title>
+        <link rel="stylesheet" href="/Styles/newTest.css">
+        <link rel="stylesheet" href="/Styles/bootstrap.min.css"/>
+        <script src="/scripts/worker.sql.js"></script>
+
+        <script>
+            // window.onload = () => loadData('sql-murder-mystery.db');
+            window.onload = () => loadData('/DBHart.db');
+
+        </script>
+        <script src="new.js"></script>
+        
+        <style>
+            body {
+                /* background-image: url('img/slider-1.jpeg'); */
+            }
+        </style>
+
+    </head>
+    <body>
+        <!-- NAVBAR -->
+        <nav style="position:fixed;" class="navbar">
+            <div class="navbar-container container">
+                <ul class="menu-items">
+                    <!-- <li><a href="index.html">Home</a></li> -->
+                    <li><a href="#" >Score: <span id="scoreContainer">0</span></a></li>
+                </ul>
+                <a href="index.html">
+                    <h1  class="logo">Query Quest</h1>
+                </a>
+            </div>
+        </nav>
+
+        <div class="container mt-5 text-center" id="startQuizCard">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Start the Game</h5>
+                    <p>Are you ready to test your SQL skills and knowledge while we solve a thrilling mystery? Click the button below to start and let's see if you have what it takes to crack the case!</p>
+                    <!-- <button class="btn btn-primary" onclick="startQuiz()">Start</button> -->
+                    <button class="btn btn-primary" onclick="Question1()">Start</button>
+
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- ********************QUIZ 1************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo1">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 1 </h5>
+                    <p>The crime_report table is represented below</p>
+                    <button class="btn btn-primary" onclick="Question1()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5" id="QuizCard1">
+            <div class="card custom-card" style="top: 75px;" id="c1">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Get all the cases in the crime_report</p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FieldDropdown">
+                                    <option value="">Select fields</option>
+                                    <option value="*">*</option>
+                                    <option value="count(*)">count(*)</option>
+                                </select>
+                            </div>
+                            FROM
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FromDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="crime_report">crime_report</option>
+                                    <option value="location">location</option>
+                                    <option value="person">person</option>
+                                </select>
+                            </div>
+    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery1()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next1()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+        
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                        <div class="container">
+                            <div id="outputContainer" class="text-center"></div>
+                            <div id="gridPagination" class="pagination-container"></div>
+                        </div>
+                    </div>
+                        <!-- <button onclick="Next()" id="next">Next Question</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ********************QUIZ 1************************ -->
+
+        <!-- ********************QUIZ 2************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo2">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 2:</h5>
+                    <p>Clue: we know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax city</p>
+                    <button class="btn btn-primary" onclick="Question2()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5" id="QuizCard2">
+            <div class="card custom-card" style="top: 75px;">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Get these records from the crime_report.</p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2StarDropdown">
+                                    <option value="">Select fields</option>
+                                    <option value="description">description</option>
+                                    <option value="*">*</option>
+                                    <option value="city">city</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2FromDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="From">From</option>
+                                    <option value="AS">AS</option>
+                                    <option value="IN">IN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2TableDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="Interview">Interview</option>
+                                    <option value="crime_report">crime_report</option>
+                                    <option value="location">location</option>
+                                </select>
+                            </div>
+                            WHERE
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="date IS '2023-04-01'">date IS '2023-04-01'</option>
+                                    <option value="date = '2023-04-01'">date = '2023-04-01'</option>
+                                    <option value="date IN ('2023-04-01')">date IN ('2023-04-01')</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2OrderByDropdown">
+                                    <option value="">Select CLAUSE</option>
+                                    <option value="ORDER BY">ORDER BY</option>
+                                    <option value="GROUP BY ">GROUP BY</option>
+                                    <option value="AND">AND</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2ConditionCityDropdown2">
+                                    <option value="">Select Condition 2</option>
+                                    <option value="type = 'missing'">type = 'missing'</option>
+                                    <option value="type = 'Robbery'">type = 'Robbery'</option>
+                                </select>
+                            </div>
+                            AND city = 'Fairfax'
+                        </div>
+   
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery2()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next2()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+       
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                        <div class="container">
+                            <div id="outputContainer" class="text-center"></div>
+                            <div id="gridPagination" class="pagination-container"></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ********************QUIZ 2************************ -->
+
+        <!-- ********************QUIZ 3************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo3">
+         <div class="card" style="top: 75px;">
+             <div class="card-body">
+                 <h5 class="card-title">Question 3:</h5>
+                 <p>Clue: </p>
+                 <button class="btn btn-primary" onclick="Question3()">Go to Question</button>
+             </div>
+         </div>
+        </div>
+        <div class="container mt-5" id="QuizCard3">
+            <div class="card custom-card" style="top: 75px;">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Find the first witness details.  </p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="StarDropdown">
+                                    <option value="">Select fields</option>
+                                    <option value="Name">Name</option>
+                                    <option value="*">*</option>
+                                    <option value="Age">Age</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FromDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="From">From</option>
+                                    <option value="AS">AS</option>
+                                    <option value="IN">IN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="TableDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="Person">Person</option>
+                                    <option value="crime_report">crime_report</option>
+                                    <option value="location">location</option>
+                                </select>
+                            </div>
+                            WHERE
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="AddressStreet IN 'Southwestern Dr'">AddressStreet IN 'Southwestern Dr'</option>
+                                    <option value="AddressStreet = 'Hanks Ave'">AddressStreet = 'Hanks Ave'</option>
+                                    <option value="AddressStreet = 'Southwestern Dr'">AddressStreet = 'Southwestern Dr'</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="OrderByDropdown">
+                                    <option value="">Select CLAUSE</option>
+                                    <option value="ORDER BY">ORDER BY</option>
+                                    <option value="GROUP BY ">GROUP BY</option>
+                                    <option value="AND">AND</option>
+                                </select>
+                            </div>
+                            AddressNumber DESC;
+                        </div>
+    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery3()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next3()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+        
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ********************QUIZ 3************************ -->
+
+        <!-- ********************QUIZ 4************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo4">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 4:</h5>
+                    <p>Clue: </p>
+                    <button class="btn btn-primary" onclick="Question4()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5" id="QuizCard4">
+            <div class="card custom-card" style="top: 75px;">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Find the second witness details.  </p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="StarDropdown">
+                                    <option value="">Select fields</option>
+                                    <option value="Name">Name</option>
+                                    <option value="*">*</option>
+                                    <option value="Age">Age</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FromDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="From">From</option>
+                                    <option value="AS">AS</option>
+                                    <option value="IN">IN</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="TableDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="Person">Person</option>
+                                    <option value="crime_report">crime_report</option>
+                                    <option value="location">location</option>
+                                </select>
+                            </div>
+                            WHERE
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="AddressStreet IN 'Southwestern Dr'">AddressStreet IN 'Southwestern Dr'</option>
+                                    <option value="AddressStreet = 'Hanks Ave'">AddressStreet = 'Hanks Ave'</option>
+                                    <option value="AddressStreet = 'Southwestern Dr'">AddressStreet = 'Southwestern Dr'</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="OrderByDropdown">
+                                    <option value="">Select CLAUSE</option>
+                                    <option value="ORDER BY">ORDER BY</option>
+                                    <option value="GROUP BY ">GROUP BY</option>
+                                    <option value="AND">AND</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                             <select class="custom-select" id="ConditionTypeDropdown2">
+                                 <option value="">Select Condition</option>
+                                 <option value="name like 'John%'">name like 'John%'</option>
+                                 <option value="name = 'John'">name = 'John'</option>
+                                 <option value="name = 'John%'">name = 'John%'</option>
+                             </select>
+                         </div>
+                        </div>
+    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery4()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next4()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+        
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+        <!-- ********************QUIZ 4************************ -->
+
+        <!-- ********************QUIZ 5************************ -->
+
+         <div class="container mt-5 text-center" id="QuizInfo5">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 5:</h5>
+                    <p>Clue: </p>
+                    <button class="btn btn-primary" onclick="Question5()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5" id="QuizCard5">
+            <div class="card custom-card" style="top: 75px;">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Find the second witness details.  </p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            *
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FromDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="IN">IN</option>
+                                    <option value="AS">AS</option>
+                                    <option value="From">From</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="TableDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="Person">Person</option>
+                                    <option value="Interview">Interview</option>
+                                    <option value="location">location</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="WhereDropdown">
+                                     <option value="">Select attribute</option>
+                                     <option value="ON">ON</option>
+                                     <option value="WHERE">WHERE</option>
+                                     <option value="JOIN">JOIN</option>
+                                 </select>
+                             </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="person_id = 14887">person_id = 14887</option>
+                                    <option value="person_id = 14744">person_id = 14744</option>
+                                    <option value="person_id = 18687">person_id = 18687</option>
+                                </select>
+                            </div>
+                            AND
+                            <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="ConditionTypeDropdown2">
+                                     <option value="">Select Condition</option>
+                                     <option value="person_id = 14887">person_id = 14887</option>
+                                     <option value="person_id = 14744">person_id = 14744</option>
+                                     <option value="person_id = 16371">person_id = 16371</option>
+                                 </select>
+                             </div>
+                        </div>
+    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery5()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next5()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+        
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+        <!-- ********************QUIZ 5************************ -->
+
+        <!-- ********************QUIZ 6************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo6">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 6:</h5>
+                    <p>Clue: </p>
+                    <button class="btn btn-primary" onclick="Question6()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5" id="QuizCard6">
+               <div class="card custom-card" style="top: 75px;">
+                   <div class="card-content">
+                       <div class="card-body">
+                           <h5 class="card-title">Find the second witness details.  </p>
+                           <div class="row" id="check1">
+                               <div class="col-md-3 mb-3">
+                                   <select class="custom-select" id="AttributeDropdown">
+                                       <option value="">Select SQL Query</option>
+                                       <option value="Select">Select</option>
+                                       <option value="Delete">Delete</option>
+                                       <option value="Insert">Insert</option>
+                                   </select>
+                               </div>
+                               * FROM
+                               
+                               <div class="col-md-3 mb-3">
+                                   <select class="custom-select" id="TableDropdown">
+                                       <option value="">Select attribute</option>
+                                       <option value="Person">Person</option>
+                                       <option value="Interview">Interview</option>
+                                       <option value="get_fit_now_member">get_fit_now_member</option>
+                                   </select>
+                               </div>
+                               <div class="col-md-3 mb-3">
+                                    <select class="custom-select" id="WhereDropdown">
+                                        <option value="">Select attribute</option>
+                                        <option value="ON">ON</option>
+                                        <option value="WHERE">WHERE</option>
+                                        <option value="JOIN">JOIN</option>
+                                    </select>
+                                </div>
+                               <div class="col-md-3 mb-3">
+                                   <select class="custom-select" id="ConditionTypeDropdown">
+                                       <option value="">Select Condition</option>
+                                       <option value="id like '48z%'">id like '48z%'</option>
+                                       <option value="id = '48z'">id = '48z'</option>
+                                       <option value="id IN ('48z%')">id IN ('48z%')</option>
+                                   </select>
+                               </div>
+                               
+                               <div class="col-md-3 mb-3">
+                                    <select class="custom-select" id="ConditionTypeDropdown2">
+                                        <option value="">Select Condition</option>
+                                        <option value="AND">AND</option>
+                                        <option value="OR">OR</option>
+                                        <option value="LIKE">LIKE</option>
+                                    </select>
+                                </div>
+                                membership_status = 'gold'
+                           </div>
+       
+                           <div class="row mt-3">
+                               <div class="col-md-6">
+                                   <button onclick="executeQuery6()" class="btn btn-primary">Execute Query</button>
+                               </div>
+                               <div class="col-md-6">
+                                   <button onclick="Next6()" id="next" class="btn btn-primary">Next Question</button>
+                               </div>
+                           </div>
+           
+                       <div class="row mt-3">
+                           <div id="errorContainer"></div>
+                           <div id="successContainer"></div>
+                       </div>
+                       </div>
+                   </div>
+               </div>
+        </div>
+   
+        <!-- ********************QUIZ 6************************ -->
+
+           
+        <!-- ********************QUIZ 7************************ -->
+
+        <div class="container mt-5 text-center" id="QuizInfo7">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">Question 7:</h5>
+                    <p>Clue: </p>
+                    <button class="btn btn-primary" onclick="Question7()">Go to Question</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5" id="QuizCard7">
+            <div class="card custom-card" style="top: 75px;">
+                <div class="card-content">
+                    <div class="card-body">
+                        <h5 class="card-title">Find the second witness details.  </p>
+                        <div class="row" id="check1">
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="AttributeDropdown">
+                                    <option value="">Select SQL Query</option>
+                                    <option value="Select">Select</option>
+                                    <option value="Delete">Delete</option>
+                                    <option value="Insert">Insert</option>
+                                </select>
+                            </div>
+                            * FROM
+                            
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="TableDropdown">
+                                    <option value="">Select attribute</option>
+                                    <option value="Person">Person</option>
+                                    <option value="drivers_license">drivers_license</option>
+                                    <option value="get_fit_now_member">get_fit_now_member</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="WhereDropdown">
+                                     <option value="">Select attribute</option>
+                                     <option value="ON">ON</option>
+                                     <option value="WHERE">WHERE</option>
+                                     <option value="JOIN">JOIN</option>
+                                 </select>
+                             </div>
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="gender = 'male'">gender = 'male'</option>
+                                    <option value="gender = 'female'">gender = 'female'</option>
+                                    <option value="gender = 'NA'">gender = 'NA'</option>
+                                </select>
+                            </div>
+                            AND
+                            <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="ConditionTypeDropdown2">
+                                     <option value="">Select Condition</option>
+                                     <option value="plate_number = 'H42W'">plate_number = 'H42W'</option>
+                                     <option value="plate_number = 'H42W%'">plate_number = 'H42W%'</option>
+                                     <option value="plate_number like '%H42W%'">plate_number like '%H42W%'</option>
+                                 </select>
+                             </div>
+                        </div>
+    
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button onclick="executeQuery7()" class="btn btn-primary">Execute Query</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button onclick="Next7()" id="next" class="btn btn-primary">Next Question</button>
+                            </div>
+                        </div>
+        
+                    <div class="row mt-3">
+                        <div id="errorContainer"></div>
+                        <div id="successContainer"></div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ********************QUIZ 7************************ -->
+
+        <!-- *********************QUIZ 8*********************** -->
+        <div class="container mt-5 text-center" id="QuizInfo8">
+             <div class="card" style="top: 75px;">
+                 <div class="card-body">
+                     <h5 class="card-title">Question 8:</h5>
+                     <p>Clue: </p>
+                     <button class="btn btn-primary" onclick="Question8()">Go to Question</button>
+                 </div>
+             </div>
+         </div>
+
+        <div class="container mt-5" id="QuizCard8">
+             <div class="card custom-card" style="top: 75px;">
+                 <div class="card-content">
+                     <div class="card-body">
+                         <h5 class="card-title">Question4</h5>
+                         <div class="row" id="check1">
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="AttributeDropdown">
+                                     <option value="">Select SQL Query</option>
+                                     <option value="Select">Select</option>
+                                     <option value="Delete">Delete</option>
+                                     <option value="Insert">Insert</option>
+                                 </select>
+                             </div>
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="FieldsDropdown">
+                                     <option value="">Select fields</option>
+                                     <option value="P.ID, P.Name, P.gender, p.height, DL.License_number">P.ID, P.Name, P.gender, p.height, DL.License_number</option>
+                                     <option value="*">*</option>
+                                 </select>
+                             </div>
+                             FROM
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="FromDropdown">
+                                     <option value="">Select attribute</option>
+                                     <option value="person as P">person as P</option>
+                                     <option value="Drivers_License as DL">Drivers_License as DL</option>
+                                     <option value="location">location</option>
+                                 </select>
+                             </div>
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="JoinDropdown">
+                                     <option value="">Select Join Type</option>
+                                     <option value="Inner Join">Inner Join</option>
+                                     <option value="Left Join">Left Join</option>
+                                     <option value="Right Join">Right Join</option>
+                                 </select>
+                             </div>
+                             Drivers_License as DL ON
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="OnDropdown">
+                                     <option value="">Select On Condition</option>
+                                     <option value="P.License_ID=DL.ID">P.License_ID=DL.ID</option>
+                                     <option value="DL.ID=P.License_ID">DL.ID=P.License_ID</option>
+                                     <option value="P.ID=DL.License_number">P.ID=DL.License_number</option>
+                                 </select>
+                             </div>
+                             WHERE
+                             <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="WhereDropdown">
+                                     <option value="">Select Where Condition</option>
+                                     <option value="DL.height = 6.0 and DL.License_number like '%NJ53%'">DL.height = 6.0 and DL.License_number like '%NJ53%'</option>
+                                     <option value="DL.height = 6.0">DL.height = 6.0</option>
+                                     <option value="DL.License_number like '%NJ53%'">DL.License_number like '%NJ53%'</option>
+                                 </select>
+                             </div>
+                         </div>
+                     
+                         <div class="row mt-3">
+                             <div class="col-md-6">
+                                 <button onclick="executeQuery8()" class="btn btn-primary">Execute Query</button>
+                             </div>
+                             <div class="col-md-6">
+                                 <button onclick="End()" id="next" class="btn btn-primary">Submit</button>
+                             </div>
+                         </div>
+                     
+                         <div class="row mt-3">
+                             <div id="errorContainer"></div>
+                             <div id="successContainer"></div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </div>
+        
+
+        <!-- *********************QUIZ 8*********************** -->
+        <!-- END SUBMIT  -->
+        <div class="container mt-5 text-center" id="successQuizCard">
+            <div class="card" style="top: 75px;">
+                <div class="card-body">
+                    <h5 class="card-title">QUIZ SUCCESSFULLY SUBMITTED</h5>
+                    <p>Congradulations in solving the mystery!!</p>
+                    <p>The quiz results have been submitted to the professor.</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+                </div>
+            </div>
+        </div>
+        <!-- END SUBMIT -->
+
+    </body>
+</html>

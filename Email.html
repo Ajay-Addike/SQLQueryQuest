@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>SQL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/owl.carousel.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/animate.css"/>
+
+    <style>
+        /* Custom CSS for centering text */
+        .hero-section .hs-text .container {
+            text-align: center;
+        }
+        /* Custom CSS for justifying text */
+        .hero-section .hs-text p {
+            text-align: justify;
+        } 
+        .custom-button 
+        {
+            background-color: #ffb320; /* Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            color: black;
+            display: none;
+        }
+        /* Additional CSS for centering the form heading */
+
+
+    </style>
+     <style>
+        /* CSS styles for the form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #ffb320;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero section -->
+    <section class="hero-section">
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/slider-1.jpeg">
+
+                <div class="container">
+                    <form id="submissionForm" action="https://formspree.io/f/mzbnrvew" method="POST">
+                        <h3 class="form-heading">Please fill out the Form below to start Playing</h3> <!-- Added heading -->
+
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                
+                        <label for="idNo">ID No:</label>
+                        <input type="text" id="idNo" name="idNo" required>
+                
+                        <input id="submitFormField" type="submit" value="Submit">
+                 
+                        <button id="playGameButton" class="custom-button">
+                            <a href="queriesJS/new.html">Play the game</a>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--====== Javascripts & Jquery ======-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.marquee.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    document.getElementById('submissionForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Gather form data
+    let formData = new FormData(this); // 'this' refers to the form
+
+    // Use Fetch API to send the form data to the server
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json', // Ensures you get a JSON response
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // or response.text() if the server sends back text
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        console.log('Success:', data);
+        alert('Form submitted successfully!'); // Alert or any other feedback
+        // Additional actions after successful submission like showing/hiding elements
+        document.getElementById('submitFormField').style.display = 'none';
+        document.getElementById('playGameButton').style.display = 'inline';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('There was a problem with your submission: ' + error.message); // Feedback for failure
+    });
+});
+
+    </script>
+        
+</body>
+</html>
