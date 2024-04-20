@@ -20,6 +20,22 @@ window.loadHomePage = function() {
     initTypewriter(); 
     };
 
+function next1(){
+    mainContent.innerHTML = `
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    score += 1;
+    document.getElementById('scoreContainer').innerText = score; // Update the score value in the navigation bar
+}
+
 window.query1 = function(){
     mainContent.innerHTML = `
     <div class="row justify-content-center mt-4">
@@ -59,7 +75,7 @@ window.query1 = function(){
 
                     <div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-success" onclick="executeQuery1()">Run!</button>
-                        <button  id="next" class="btn btn-primary">Next Question</button>
+                        <button  id="next1" class="btn btn-primary" disabled onclick="next1()">Next Question</button>
                     </div>
                     <div class="row mt-3">
                     <div id="errorContainer"></div>
@@ -75,6 +91,9 @@ window.query1 = function(){
     </div>
     `;
 };
+
+
+
 function query(sql, cb, err_cb) {
     if (err_cb) {
         worker.onerror = e => err_cb(e);
@@ -151,14 +170,10 @@ function displayResults(results) {
 
 function displaySuccess(successMessage, containerId) {
     const successContainer = document.getElementById(containerId);
-    score += 1;
-    document.getElementById('scoreContainer').innerText = score; // Update the score value in the navigation bar
     successContainer.innerHTML = `
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success:</strong> ${successMessage}<br/>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            
         </div>
     `;
 }
@@ -178,13 +193,13 @@ window.executeQuery1 = function(){
             clearError();
             displaySuccess('Query executed successfully', 'successContainer');
             
-            document.getElementById("next").disabled = false;
+            document.getElementById("next1").disabled = false;
 
         });
     }
     catch (error) {
         displayError('Please select options from the dropdowns');
-        document.getElementById("next").disabled = true;
+        document.getElementById("next1").disabled = true;
     }
 }
 
