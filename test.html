@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend Pagination</title>
+    <style>
+        #dataContainer div {
+            padding: 8px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+        }
+        #controls {
+            margin-top: 20px;
+        }
+        button {
+            margin-right: 5px;
+            padding: 5px 10px;
+        }
+        #pageInfo {
+            margin: 0 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="dataContainer"></div>
+    <div id="controls">
+        <button id="prevButton">Previous</button>
+        <span id="pageInfo"></span>
+        <button id="nextButton">Next</button>
+    </div>
+    <script>
+        // Example data array
+        const data = Array.from({ length: 95 }, (_, i) => `Item ${i + 1}`);
+
+        // Constants for pagination
+        const itemsPerPage = 10;
+        let currentPage = 1;
+        const totalPages = Math.ceil(data.length / itemsPerPage);
+
+        // Function to render the current page's data
+        function renderData(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = page * itemsPerPage;
+            const pageData = data.slice(start, end);
+
+            const container = document.getElementById('dataContainer');
+            container.innerHTML = ''; // Clear existing data
+
+            pageData.forEach(item => {
+                const div = document.createElement('div');
+                div.textContent = item;
+                container.appendChild(div);
+            });
+
+            // Update page information
+            document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
+        }
+
+        // Function to handle page changes
+        function changePage(newPage) {
+            if (newPage > 0 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderData(currentPage);
+            }
+        }
+
+        // Adding event listeners to buttons
+        document.getElementById('prevButton').addEventListener('click', () => {
+            changePage(currentPage - 1);
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            changePage(currentPage + 1);
+        });
+
+        // Initial data rendering
+        renderData(currentPage);
+    </script>
+</body>
+</html>

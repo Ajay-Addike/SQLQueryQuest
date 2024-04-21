@@ -1,5 +1,6 @@
 var mainContent = document.getElementById('main-content');
 let score = 0;
+let currentPage = 1;
 
 window.loadHomePage = function() {
     mainContent.innerHTML = `
@@ -97,19 +98,44 @@ window.query1 = function(){
 
 function displayError(errorMessage) {
     const errorContainer = document.getElementById('errorContainer');
+    let error = 'Error:';
+    if(errorMessage.includes(error))
+        error ='';
     errorContainer.innerHTML = `
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error:</strong> ${errorMessage}
+            <strong>${error}</strong> ${errorMessage}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
     `;
 }
+
+function clearError() {
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.innerHTML = '';
+}
+function clearSuccess() {
+    const successContainer = document.getElementById('successContainer');
+    successContainer.innerHTML = '';
+}
+function clearOutputAndGrid() {
+    const clearOutput = document.getElementById('outputContainer');
+    clearOutput.innerHTML = '';
+    document.getElementById('gridPagination').innerHTML = '';
+}
+
+function changePage(page) {
+    currentPage = page;
+    displayResults(resultsData, page); // Call displayResults to show the updated page
+}
+
 function query(sql, cb, err_cb) {
     if (err_cb) {
         worker.onerror = e => err_cb(e);
     } else {
+            clearSuccess();
+            clearOutputAndGrid();
         worker.onerror = e => { throw new Error(displayError(e.message)); }
     }
 
@@ -123,31 +149,29 @@ function query(sql, cb, err_cb) {
     });
 }
 
+function displayResults(results, page) {
 
-function clearError() {
-    const errorContainer = document.getElementById('errorContainer');
-    errorContainer.innerHTML = '';
-}
-function changePage(page) {
-    currentPage = page;
-    displayResults(resultsData); // Call displayResults to show the updated page
-}
+    itemsPerPage = 3;
+    const start = (page - 1) * itemsPerPage;
+    // const end = page * itemsPerPage;
+    const end = Math.min(page * itemsPerPage, results[0].values.length);
 
+    let pageData = results[0].values;
+    pageData = pageData.slice(start, end);
+    // const pageData = results[0].values.slice(start, end);
 
-function displayResults(results) {
     resultsData= results;
     console.log(results[0])
-    pageSize = 5;
     var startIndex = 0;
-    var endIndex = Math.min(startIndex + pageSize, results[0].values.length);
+    var endIndex = Math.min(startIndex + itemsPerPage, results[0].values.length);
     var tableHTML = "<table class='table table-bordered mt-3'>";
     tableHTML += "<thead><tr>";
     results[0].columns.forEach(column => {
         tableHTML += "<th>" + column + "</th>";
     });
     tableHTML += "</tr></thead><tbody>";
-    for (var i = startIndex; i < endIndex; i++) {
-        var row = results[0].values[i];
+    for (var i = 0; i < pageData.length; i++) {
+        var row = pageData[i];
         //console.log(row);
         tableHTML += "<tr>";
         row.forEach(cell => { 
@@ -159,15 +183,19 @@ function displayResults(results) {
 
     // var recordsInfo = `Showing ${startIndex + 1}-${endIndex} of ${results[0].values.length} records`;
     // tableHTML += `<div>${recordsInfo}</div>`;
-    console.log(tableHTML)
+    // console.log(tableHTML)
     document.getElementById("outputContainer").innerHTML = tableHTML;
 
     var paginationHTML = "";
-    var totalPages = Math.ceil(results[0].values.length / pageSize);
+    var totalPages = Math.ceil(results[0].values.length / itemsPerPage);
     for (var i = 1; i <= totalPages; i++) {
         paginationHTML += `<button onclick="changePage(${i})">${i}</button>`;
     }
     document.getElementById("gridPagination").innerHTML = paginationHTML;
+
+    // for (let index = 0; index < itemsPerPage; index++) {
+    //     resultsData[0].values.shift();        
+    // }
 }
 
 function displaySuccess(successMessage, containerId) {
@@ -191,7 +219,7 @@ window.executeQuery1 = function(){
         const sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown}`;
         console.log(sqlQuery);
         query(sqlQuery, function (result) {
-            displayResults(result);
+            displayResults(result,currentPage);
             clearError();
             displaySuccess('Query executed successfully', 'successContainer');
             
@@ -200,6 +228,8 @@ window.executeQuery1 = function(){
         });
     }
     catch (error) {
+        clearSuccess();
+        clearOutputAndGrid();
         displayError('Please select options from the dropdowns');
         document.getElementById("next1").disabled = true;
     }
