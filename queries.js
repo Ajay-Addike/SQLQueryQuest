@@ -1,9 +1,9 @@
-var mainContent = document.getElementById('main-content');
+var mainContent = document.getElementById("main-content");
 let score = 0;
 let currentPage = 1;
 
-window.loadHomePage = function() {
-    mainContent.innerHTML = `
+window.loadHomePage = function () {
+  mainContent.innerHTML = `
     <div class="row justify-content-center mt-4">
         <div class="col-md-6">
             <div class="card bg-light mb-3">
@@ -11,43 +11,79 @@ window.loadHomePage = function() {
                     <h5 class="card-title">Start the Game</h5>
                     <p id="demo" data-text="Are you ready to test your SQL skills and knowledge while we solve a thrilling mystery? Click the button below to start and let's see if you have what it takes to crack the case!"></p>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-success" onclick="query1()">Go!</button>
+                        <button type="button" class="btn btn-success" onclick="Query(1)">Go!</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     `;
-    initTypewriter(); 
-    };
+  initTypewriter();
+};
 
-function next1(){
+function next1(No) {
+  if (No == 2) {
     mainContent.innerHTML = `
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-6">
-            <div class="card bg-light mb-3">
-                <div class="card-body">
-                <h5 class="card-title">Question 2:</h5>
-                <p>Clue: we know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax city</p>
-                <button class="btn btn-primary" onclick="Question2()">Go to Question</button>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                    <h5 class="card-title">Question 2:</h5>
+                    <p>Clue: we know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax city</p>
+                    <button class="btn btn-primary" onclick="Query(2)">Go to Question</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    `;
-    score += 1;
-    document.getElementById('scoreContainer').innerText = score; // Update the score value in the navigation bar
+        `;
+  }
+  // else if(No == 3)
+  // {
+  //     mainContent.innerHTML = `
+  //     <div class="row justify-content-center mt-4">
+  //         <div class="col-md-6">
+  //             <div class="card bg-light mb-3">
+  //                 <div class="card-body">
+  //                 <h5 class="card-title">Question 2:</h5>
+  //                 <p>Clue: we know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax city</p>
+  //                 <button class="btn btn-primary" onclick="query3()">Go to Question</button>
+  //             </div>
+  //         </div>
+  //     </div>
+  //     `;
+  // }
+  score += 1;
+  document.getElementById("scoreContainer").innerText = score;
 }
 
-window.query1 = function(){
-    mainContent.innerHTML = `
+window.Query = function (show) {
+  mainContent.innerHTML = `
     <div class="row justify-content-center mt-4">
         <div class="col-md-6">
             <div class="card bg-light mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Get the no of cases in the crime_report</h5>
+                    ${
+                      show == 1
+                        ? `<h5 class="card-title">Get the no of cases in the crime_report</h5>
+                        `
+                        : ""
+                    }
+                    ${
+                      show == 2
+                        ? `<h5 class="card-title">Get all records from the crime_report</h5>`
+                        : ""
+                    }
+                    ${
+                      show == 3
+                        ? `<h5 class="card-title">Find the first witness details.</h5>`
+                        : ""
+                    }
+                    ${
+                      show == 4
+                        ? `<h5 class="card-title">Find the second witness details.</h5>`
+                        : ""
+                    }
                     <p>Select the options from the below represented dropdown to form a query</p>
-
                     <div class="row" id="check1">
                         <div class="col-md-3 mb-3">
                             <select class="custom-select" id="AttributeDropdown">
@@ -73,13 +109,74 @@ window.query1 = function(){
                                 <option value="person">person</option>
                             </select>
                         </div>
-                    </div>
+                        ${
+                          show == 2
+                            ? `where date
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="IS '2023-04-01'">IS '2023-04-01'</option>
+                                    <option value="= '2023-04-01'">= '2023-04-01'</option>
+                                    <option value="IN ('2023-04-01')">IN ('2023-04-01')</option>
+                                </select>
+                            </div>
+                            and type =
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q2ConditionCityDropdown2">
+                                    <option value="">Select Condition 2</option>
+                                    <option value="'missing'">'missing'</option>
+                                    <option value="'Robbery'">'Robbery'</option>
+                                </select>
+                            </div>
+                            and city = 'Fairfax';
+                            
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-success" onclick="executeQuery(2)">Run!</button>
+                                <button  id="next1" class="btn btn-primary" disabled onclick="Query(3)">Next Question</button>
+                            </div>
+                            `
+                            : ""
+                        }
+                        ${
+                            show == 3
+                              ? `   WHERE AddressStreet
+                              <div class="col-md-3 mb-3">
+                                  <select class="custom-select" id="Q3ConditionTypeDropdown">
+                                      <option value="">Select Condition</option>
+                                      <option value="IN 'Southwestern Dr'">IN 'Southwestern Dr'</option>
+                                      <option value="= 'Hanks Ave'">= 'Hanks Ave'</option>
+                                      <option value="= 'Southwestern Dr'">= 'Southwestern Dr'</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                  <select class="custom-select" id="Q3OrderByDropdown">
+                                      <option value="">Select CLAUSE</option>
+                                      <option value="ORDER BY">ORDER BY</option>
+                                      <option value="GROUP BY ">GROUP BY</option>
+                                      <option value="AND">AND</option>
+                                  </select>
+                              </div>
+                              AddressNumber DESC;
+                              
+                              <div class="d-flex justify-content-end">
+                              <button type="button" class="btn btn-success" onclick="executeQuery(3)">Run!</button>
+                              <button  id="next1" class="btn btn-primary" disabled onclick="Query(3)">Next Question</button>
+                          </div>`
+                              : ""
+                          }
 
 
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-success" onclick="executeQuery1()">Run!</button>
-                        <button  id="next1" class="btn btn-primary" disabled onclick="next1()">Next Question</button>
                     </div>
+
+                    ${
+                      show == 1
+                        ? `<div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-success" onclick="executeQuery(1)">Run!</button>
+                        <button  id="next1" class="btn btn-primary" disabled onclick="next1(2)">Next Question</button>
+                    </div>`
+                        : ""
+                    }
+                    
                     <div class="row mt-3">
                     <div id="errorContainer"></div>
                     <div id="successContainer"></div>
@@ -95,13 +192,11 @@ window.query1 = function(){
     `;
 };
 
-
 function displayError(errorMessage) {
-    const errorContainer = document.getElementById('errorContainer');
-    let error = 'Error:';
-    if(errorMessage.includes(error))
-        error ='';
-    errorContainer.innerHTML = `
+  const errorContainer = document.getElementById("errorContainer");
+  let error = "Error:";
+  if (errorMessage.includes(error)) error = "";
+  errorContainer.innerHTML = `
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>${error}</strong> ${errorMessage}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -112,95 +207,96 @@ function displayError(errorMessage) {
 }
 
 function clearError() {
-    const errorContainer = document.getElementById('errorContainer');
-    errorContainer.innerHTML = '';
+  const errorContainer = document.getElementById("errorContainer");
+  errorContainer.innerHTML = "";
 }
 function clearSuccess() {
-    const successContainer = document.getElementById('successContainer');
-    successContainer.innerHTML = '';
+  const successContainer = document.getElementById("successContainer");
+  successContainer.innerHTML = "";
 }
 function clearOutputAndGrid() {
-    const clearOutput = document.getElementById('outputContainer');
-    clearOutput.innerHTML = '';
-    document.getElementById('gridPagination').innerHTML = '';
+  const clearOutput = document.getElementById("outputContainer");
+  clearOutput.innerHTML = "";
+  document.getElementById("gridPagination").innerHTML = "";
 }
 
 function changePage(page) {
-    currentPage = page;
-    displayResults(resultsData, page); // Call displayResults to show the updated page
+  currentPage = page;
+  displayResults(resultsData, page); // Call displayResults to show the updated page
 }
 
 function query(sql, cb, err_cb) {
-    if (err_cb) {
-        worker.onerror = e => err_cb(e);
-    } else {
-            clearSuccess();
-            clearOutputAndGrid();
-        worker.onerror = e => { throw new Error(displayError(e.message)); }
-    }
+  if (err_cb) {
+    worker.onerror = (e) => err_cb(e);
+  } else {
+    clearSuccess();
+    clearOutputAndGrid();
+    worker.onerror = (e) => {
+      throw new Error(displayError(e.message));
+    };
+  }
 
-    worker.onmessage = event => {
-        cb(event.data.results);
-    }
-    worker.postMessage({
-        id: 2,
-        action: 'exec',
-        sql: sql
-    });
+  worker.onmessage = (event) => {
+    cb(event.data.results);
+  };
+  worker.postMessage({
+    id: 2,
+    action: "exec",
+    sql: sql,
+  });
 }
 
 function displayResults(results, page) {
+  itemsPerPage = 3;
+  const start = (page - 1) * itemsPerPage;
+  // const end = page * itemsPerPage;
+  const end = Math.min(page * itemsPerPage, results[0].values.length);
 
-    itemsPerPage = 3;
-    const start = (page - 1) * itemsPerPage;
-    // const end = page * itemsPerPage;
-    const end = Math.min(page * itemsPerPage, results[0].values.length);
+  let pageData = results[0].values;
+  pageData = pageData.slice(start, end);
+  // const pageData = results[0].values.slice(start, end);
 
-    let pageData = results[0].values;
-    pageData = pageData.slice(start, end);
-    // const pageData = results[0].values.slice(start, end);
-
-    resultsData= results;
-    // console.log(results[0])
-    var startIndex = 0;
-    var endIndex = Math.min(startIndex + itemsPerPage, results[0].values.length);
-    var tableHTML = "<table class='table table-bordered mt-3'>";
-    tableHTML += "<thead><tr>";
-    results[0].columns.forEach(column => {
-        tableHTML += "<th>" + column + "</th>";
+  resultsData = results;
+  // console.log(results[0])
+  var startIndex = 0;
+  var endIndex = Math.min(startIndex + itemsPerPage, results[0].values.length);
+  var tableHTML = "<table class='table table-bordered mt-3'>";
+  tableHTML += "<thead><tr>";
+  results[0].columns.forEach((column) => {
+    tableHTML += "<th>" + column + "</th>";
+  });
+  tableHTML += "</tr></thead><tbody>";
+  for (var i = 0; i < pageData.length; i++) {
+    var row = pageData[i];
+    //console.log(row);
+    tableHTML += "<tr>";
+    row.forEach((cell) => {
+      tableHTML += "<td>" + cell + "</td>";
     });
-    tableHTML += "</tr></thead><tbody>";
-    for (var i = 0; i < pageData.length; i++) {
-        var row = pageData[i];
-        //console.log(row);
-        tableHTML += "<tr>";
-        row.forEach(cell => { 
-            tableHTML += "<td>" + cell + "</td>";
-        });
-        tableHTML += "</tr>";
-    }
-    tableHTML += "</tbody></table>";
+    tableHTML += "</tr>";
+  }
+  tableHTML += "</tbody></table>";
 
-    // var recordsInfo = `Showing ${startIndex + 1}-${endIndex} of ${results[0].values.length} records`;
-    // tableHTML += `<div>${recordsInfo}</div>`;
-    // console.log(tableHTML)
-    document.getElementById("outputContainer").innerHTML = tableHTML;
+  // var recordsInfo = `Showing ${startIndex + 1}-${endIndex} of ${results[0].values.length} records`;
+  // tableHTML += `<div>${recordsInfo}</div>`;
+  // console.log(tableHTML)
+  document.getElementById("outputContainer").innerHTML = tableHTML;
 
-    var paginationHTML = "";
-    var totalPages = Math.ceil(results[0].values.length / itemsPerPage);
-    for (var i = 1; i <= totalPages; i++) {
-        paginationHTML += `<button onclick="changePage(${i})">${i}</button>`;
-    }
-    document.getElementById("gridPagination").innerHTML = paginationHTML;
+  var paginationHTML = "";
+  var totalPages = Math.ceil(results[0].values.length / itemsPerPage);
+  for (var i = 1; i <= totalPages; i++) {
+    paginationHTML += `<button onclick="changePage(${i})">${i}</button>`;
+  }
+  document.getElementById("gridPagination").innerHTML = paginationHTML;
 
-    // for (let index = 0; index < itemsPerPage; index++) {
-    //     resultsData[0].values.shift();        
-    // }
+  // for (let index = 0; index < itemsPerPage; index++) {
+  //     resultsData[0].values.shift();
+  // }
 }
 
 function displaySuccess(successMessage, containerId) {
-    const successContainer = document.getElementById(containerId);
-    successContainer.innerHTML = `
+  const successContainer = document.getElementById(containerId);
+  successContainer.innerHTML = `
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Success:</strong> ${successMessage}<br/>
             
@@ -208,52 +304,73 @@ function displaySuccess(successMessage, containerId) {
     `;
 }
 
-window.executeQuery1 = function(){
-    const AttributeDropdown = document.getElementById("AttributeDropdown").value;
-    const StarDropdown = document.getElementById('FieldDropdown').value;
-    const FromDropdown = document.getElementById('FromDropdown').value;
-    try{
-        if (!AttributeDropdown.trim() || !StarDropdown.trim() || !FromDropdown.trim()) {
-            throw new Error('Please select options from the dropdowns');
-        }
-        const sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown}`;
-        console.log(sqlQuery);
-        query(sqlQuery, function (result) {
-            displayResults(result,currentPage);
-            clearError();
-            displaySuccess('Query executed successfully', 'successContainer');
-            
-            document.getElementById("next1").disabled = false;
+window.executeQuery = function (queryNo) {
+  let sqlQuery = "";
+  const AttributeDropdown = document.getElementById("AttributeDropdown").value;
+  const StarDropdown = document.getElementById("FieldDropdown").value;
+  const FromDropdown = document.getElementById("FromDropdown").value;
+  const Q2ConditionTypeDropdown =
+    document.getElementById("Q2ConditionTypeDropdown")?.value ||
+    "fallbackValue";
+  const Q2ConditionCityDropdown2 =
+    document.getElementById("Q2ConditionCityDropdown2")?.value ||
+    "fallbackValue";
+    const Q3ConditionTypeDropdown =
+    document.getElementById("Q3ConditionTypeDropdown")?.value ||
+    "fallbackValue";
+    const Q3OrderByDropdown =
+    document.getElementById("Q3OrderByDropdown")?.value ||
+    "fallbackValue";
 
-        });
+  try {
+    if (
+      !AttributeDropdown.trim() ||
+      !StarDropdown.trim() ||
+      !FromDropdown.trim() ||
+      !Q2ConditionTypeDropdown.trim() ||
+      !Q2ConditionCityDropdown2.trim()
+    ) {
+      throw new Error("Please select options from the dropdowns");
     }
-    catch (error) {
-        clearSuccess();
-        clearOutputAndGrid();
-        displayError('Please select options from the dropdowns');
-        document.getElementById("next1").disabled = true;
-    }
-}
+    if (queryNo == 1)
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown}`;
+    else if (queryNo == 2)
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
+    else if (queryNo == 3)
+    sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} ${Q3OrderByDropdown} AddressNumber DESC;`;
+
+    console.log(sqlQuery);
+    query(sqlQuery, function (result) {
+      displayResults(result, currentPage);
+      clearError();
+      displaySuccess("Query executed successfully", "successContainer");
+
+      document.getElementById("next1").disabled = false;
+    });
+  } catch (error) {
+    clearSuccess();
+    clearOutputAndGrid();
+    displayError("Please select options from the dropdowns");
+    document.getElementById("next1").disabled = true;
+  }
+};
 
 function initTypewriter() {
-    var demo = document.getElementById("demo");
-    var txt = demo.getAttribute("data-text");
-    var i = 0;
-    var speed = 7;
-    
-    function typeWriter() {
-        if (i < txt.length) {
-            demo.innerHTML += txt.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-        }
+  var demo = document.getElementById("demo");
+  var txt = demo.getAttribute("data-text");
+  var i = 0;
+  var speed = 7;
+
+  function typeWriter() {
+    if (i < txt.length) {
+      demo.innerHTML += txt.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
     }
-    typeWriter();
-    }
+  }
+  typeWriter();
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-    loadHomePage(); // Initial load
-    });
-
-
-      
+document.addEventListener("DOMContentLoaded", function () {
+  loadHomePage(); // Initial load
+});

@@ -30,52 +30,79 @@
         <button id="nextButton">Next</button>
     </div>
     <script>
-        // Example data array
-        const data = Array.from({ length: 95 }, (_, i) => `Item ${i + 1}`);
+        window.query2 = function () {
+  mainContent.innerHTML = `
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <p>Get all records from the crime_report.</p>
 
-        // Constants for pagination
-        const itemsPerPage = 10;
-        let currentPage = 1;
-        const totalPages = Math.ceil(data.length / itemsPerPage);
+                    <div class="row" id="check2">
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="AttributeDropdown">
+                                <option value="">Select SQL Query</option>
+                                <option value="Select">Select</option>
+                                <option value="Delete">Delete</option>
+                                <option value="Insert">Insert</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="FieldDropdown">
+                                <option value="">Select fields</option>
+                                <option value="*">*</option>
+                                <option value="count(*)">count(*)</option>
+                            </select>
+                        </div>
+                        FROM
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="FromDropdown">
+                                <option value="">Select attribute</option>
+                                <option value="crime_report">crime_report</option>
+                                <option value="location">location</option>
+                                <option value="person">person</option>
+                            </select>
+                        </div>
+                        where date
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="Q2ConditionTypeDropdown">
+                                <option value="">Select Condition</option>
+                                <option value="IS '2023-04-01'">IS '2023-04-01'</option>
+                                <option value="= '2023-04-01'">= '2023-04-01'</option>
+                                <option value="IN ('2023-04-01')">IN ('2023-04-01')</option>
+                            </select>
+                        </div>
+                        and type =
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="Q2ConditionCityDropdown2">
+                                <option value="">Select Condition 2</option>
+                                <option value="'missing'">'missing'</option>
+                                <option value="'Robbery'">'Robbery'</option>
+                            </select>
+                        </div>
+                        and city = 'Fairfax';
+                    </div>
 
-        // Function to render the current page's data
-        function renderData(page) {
-            const start = (page - 1) * itemsPerPage;
-            const end = page * itemsPerPage;
-            const pageData = data.slice(start, end);
 
-            const container = document.getElementById('dataContainer');
-            container.innerHTML = ''; // Clear existing data
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-success" onclick="executeQuery1(2)">Run!</button>
+                        <button  id="next1" class="btn btn-primary" disabled onclick="query3()">Next Question</button>
+                    </div>
+                    <div class="row mt-3">
+                    <div id="errorContainer"></div>
+                    <div id="successContainer"></div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div id="outputContainer" class="text-center"></div>
+            <div id="gridPagination" class="pagination-container"></div>
+        </div>
+    </div>
+    `;
+};
 
-            pageData.forEach(item => {
-                const div = document.createElement('div');
-                div.textContent = item;
-                container.appendChild(div);
-            });
-
-            // Update page information
-            document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
-        }
-
-        // Function to handle page changes
-        function changePage(newPage) {
-            if (newPage > 0 && newPage <= totalPages) {
-                currentPage = newPage;
-                renderData(currentPage);
-            }
-        }
-
-        // Adding event listeners to buttons
-        document.getElementById('prevButton').addEventListener('click', () => {
-            changePage(currentPage - 1);
-        });
-
-        document.getElementById('nextButton').addEventListener('click', () => {
-            changePage(currentPage + 1);
-        });
-
-        // Initial data rendering
-        renderData(currentPage);
     </script>
 </body>
 </html>
