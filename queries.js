@@ -83,6 +83,21 @@ window.Query = function (show) {
                         ? `<h5 class="card-title">Find the second witness details.</h5>`
                         : ""
                     }
+                    ${
+                      show == 5
+                        ? `<h5 class="card-title">Get Interview transcript.</h5>`
+                        : ""
+                    }
+                    ${
+                      show == 6
+                        ? `<h5 class="card-title">Get License Plate details.</h5>`
+                        : ""
+                    }
+                    ${
+                      show == 7
+                        ? `<h5 class="card-title">Find the culprit.</h5>`
+                        : ""
+                    }
                     <p>Select the options from the below represented dropdown to form a query</p>
                     <div class="row" id="check1">
                         <div class="col-md-3 mb-3">
@@ -93,22 +108,83 @@ window.Query = function (show) {
                                 <option value="Insert">Insert</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mb-3">
+                        ${
+                          show != 7
+                            ? `<div class="col-md-3 mb-3">
                             <select class="custom-select" id="FieldDropdown">
                                 <option value="">Select fields</option>
                                 <option value="*">*</option>
                                 <option value="count(*)">count(*)</option>
                             </select>
-                        </div>
+                        </div>`
+                            : `P.ID, P.Name, P.gender, p.height, DL.License_number`
+                        }
+                        
                         FROM
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="FromDropdown">
-                                <option value="">Select attribute</option>
-                                <option value="crime_report">crime_report</option>
-                                <option value="location">location</option>
-                                <option value="person">person</option>
-                            </select>
-                        </div>
+                        
+                        ${
+                          show == 5 || show == 6
+                            ? `<div class="col-md-3 mb-3">
+                              <select class="custom-select" id="FromDropdown">
+                                  <option value="">Select attribute</option>
+                                  <option value="Drivers_License">Drivers_License</option>
+                                  <option value="interview">interview</option>
+                                  <option value="person">person</option>
+                              </select>
+                          </div>`
+                            : `<div class="col-md-3 mb-3">
+                              <select class="custom-select" id="FromDropdown">
+                                  <option value="">Select attribute</option>
+                                  <option value="crime_report">crime_report</option>
+                                  <option value="location">location</option>
+                                  <option value="person">person</option>
+                              </select>
+                          </div>`
+                        }
+
+                        ${
+                          show == 7
+                            ? `
+                              as 
+                                <div class="col-md-3 mb-3">
+                                    <select class="custom-select" id="alias1">
+                                        <option value="">Select attribute</option>
+                                        <option value="p">p</option>
+                                        <option value="DL">DL</option>
+                                        <option value="D">D</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <select class="custom-select" id="joinDropDown">
+                                        <option value="">Select attribute</option>
+                                        <option value="Inner Join">Inner Join</option>
+                                        <option value="Outer Join">Outer Join</option>
+                                        <option value="Left Join">Left Join</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                              <select class="custom-select" id="FromDropdown2">
+                                  <option value="">Select attribute</option>
+                                  <option value="Drivers_License">Drivers_License</option>
+                                  <option value="interview">interview</option>
+                                  <option value="person">person</option>
+                              </select>
+                          </div>
+                                as DL
+                                <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="onDropDown">
+                                    <option value="">Select attribute</option>
+                                    <option value="on">on</option>
+                                    <option value="out">out</option>
+                                    <option value="in">in</option>
+                                </select>
+                            </div>
+                            P.License_ID
+
+                              `
+                            : ``
+                        }
+
                         ${
                           show == 2
                             ? `where date
@@ -138,8 +214,8 @@ window.Query = function (show) {
                             : ""
                         }
                         ${
-                            show == 3
-                              ? `   WHERE AddressStreet
+                          show == 3
+                            ? `   WHERE AddressStreet
                               <div class="col-md-3 mb-3">
                                   <select class="custom-select" id="Q3ConditionTypeDropdown">
                                       <option value="">Select Condition</option>
@@ -160,11 +236,115 @@ window.Query = function (show) {
                               
                               <div class="d-flex justify-content-end">
                               <button type="button" class="btn btn-success" onclick="executeQuery(3)">Run!</button>
-                              <button  id="next1" class="btn btn-primary" disabled onclick="Query(3)">Next Question</button>
+                              <button  id="next1" class="btn btn-primary" disabled onclick="Query(4)">Next Question</button>
                           </div>`
-                              : ""
-                          }
+                            : ""
+                        }
+                        ${
+                          show == 4
+                            ? ` WHERE AddressStreet
+                              <div class="col-md-3 mb-3">
+                              <select class="custom-select" id="Q3ConditionTypeDropdown">
+                                  <option value="">Select Condition</option>
+                                  <option value="IN 'Southwestern Dr'">IN 'Southwestern Dr'</option>
+                                  <option value="= 'Hanks Ave'">= 'Hanks Ave'</option>
+                                  <option value="= 'Southwestern Dr'">= 'Southwestern Dr'</option>
+                              </select>
+                          </div>
+                          <div class="col-md-3 mb-3">
+                          name
+                          </div>
+                              <div class="col-md-3 mb-3">
+                              
+                               <select class="custom-select" id="Q4ConditionTypeDropdown2">
+                                   <option value="">Select Condition</option>
+                                   <option value="like 'John%'">like 'John%'</option>
+                                   <option value="like = 'John'">like = 'John'</option>
+                                   <option value="like = 'John%'">like = 'John%'</option>
+                               </select>  
+                               </div>
 
+                               <div class="d-flex justify-content-end">
+                               <button type="button" class="btn btn-success" onclick="executeQuery(4)">Run!</button>
+                               <button  id="next1" class="btn btn-primary" disabled onclick="Query(5)">Next Question</button>
+                           </div>
+                                `
+                            : ""
+                        }
+                        ${
+                          show == 5
+                            ? ` WHERE person ID
+                                <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q5ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="= 13867">= 13867</option>
+                                    <option value="= 14867">= 14867</option>
+                                    <option value="= 15867">= 15867</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                 <select class="custom-select" id="Q5ConditionTypeDropdown2">
+                                     <option value="">Select Condition</option>
+                                     <option value="AND">AND</option>
+                                     <option value="OR">OR</option>
+                                     <option value="NOT">NOT</option>
+                                 </select>  
+                            </div>
+                            personID
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q5ConditionTypeDropdown3">
+                                    <option value="">Select Condition</option>
+                                    <option value="= 27663">= 27663</option>
+                                    <option value="= 24663">= 24663</option>
+                                    <option value="= 15867">= 15867</option>
+                                </select>
+                            </div>
+  
+                                 <div class="d-flex justify-content-end">
+                                 <button type="button" class="btn btn-success" onclick="executeQuery(5)">Run!</button>
+                                 <button  id="next1" class="btn btn-primary" disabled onclick="Query(6)">Next Question</button>
+                             </div>
+                                  `
+                            : ""
+                        }
+                        ${
+                          show == 6
+                            ? ` WHERE License Number
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q6ConditionTypeDropdown">
+                                    <option value="">Select Condition</option>
+                                    <option value="like '%NJ53%'">like '%NJ53%'</option>
+                                    <option value="like = '%NJ53%'">like = '%NJ53%'</option>
+                                    <option value="like = '%NJ533%'">like = '%NJ533%'</option>
+                                </select>  
+                            </div>
+    
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-success" onclick="executeQuery(6)">Run!</button>
+                                    <button  id="next1" class="btn btn-primary" disabled onclick="Query(7)">Next Question</button>
+                                </div>
+                                    `
+                            : ""
+                        }
+                        ${
+                          show == 7
+                            ? ` 
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="Q7ConditionTypeDropdown3">
+                                    <option value="">Select Condition</option>
+                                    <option value="= DL.ID">= DL.ID</option>
+                                    <option value="= p.ID">= p.ID</option>
+                                    <option value="= D.ID">= D.ID</option>
+                                </select>
+                            </div>
+                            WHERE DL.height = 6.0 and DL.License_number like '%NJ53%';
+
+                            <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-success" onclick="executeQuery(7)">Run!</button>
+                                </div>
+                            `
+                            : ""
+                        }
 
                     </div>
 
@@ -307,20 +487,42 @@ function displaySuccess(successMessage, containerId) {
 window.executeQuery = function (queryNo) {
   let sqlQuery = "";
   const AttributeDropdown = document.getElementById("AttributeDropdown").value;
-  const StarDropdown = document.getElementById("FieldDropdown").value;
+  const StarDropdown = document.getElementById("FieldDropdown")?.value || "fallbackValue";
   const FromDropdown = document.getElementById("FromDropdown").value;
+  const FromDropdown2 = document.getElementById("FromDropdown2")?.value || "fallbackValue";
+
   const Q2ConditionTypeDropdown =
     document.getElementById("Q2ConditionTypeDropdown")?.value ||
     "fallbackValue";
   const Q2ConditionCityDropdown2 =
     document.getElementById("Q2ConditionCityDropdown2")?.value ||
     "fallbackValue";
-    const Q3ConditionTypeDropdown =
+  const Q3ConditionTypeDropdown =
     document.getElementById("Q3ConditionTypeDropdown")?.value ||
     "fallbackValue";
-    const Q3OrderByDropdown =
-    document.getElementById("Q3OrderByDropdown")?.value ||
+  const Q3OrderByDropdown =
+    document.getElementById("Q3OrderByDropdown")?.value || "fallbackValue";
+  const Q4ConditionTypeDropdown2 =
+    document.getElementById("Q4ConditionTypeDropdown2")?.value ||
     "fallbackValue";
+  const Q5ConditionTypeDropdown =
+    document.getElementById("Q5ConditionTypeDropdown")?.value ||
+    "fallbackValue";
+  const Q5ConditionTypeDropdown2 =
+    document.getElementById("Q5ConditionTypeDropdown2")?.value ||
+    "fallbackValue";
+  const Q5ConditionTypeDropdown3 =
+    document.getElementById("Q5ConditionTypeDropdown3")?.value ||
+    "fallbackValue";
+  const Q6ConditionTypeDropdown =
+    document.getElementById("Q6ConditionTypeDropdown")?.value ||
+    "fallbackValue";
+  const alias1 = document.getElementById("alias1")?.value || "fallbackValue";
+  const onDropDown = document.getElementById("onDropDown")?.value || "fallbackValue";
+  const joinDropDown = document.getElementById("joinDropDown")?.value || "fallbackValue";
+
+  const Q7ConditionTypeDropdown3 = document.getElementById("Q7ConditionTypeDropdown3")?.value || "fallbackValue";
+
 
   try {
     if (
@@ -337,7 +539,17 @@ window.executeQuery = function (queryNo) {
     else if (queryNo == 2)
       sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
     else if (queryNo == 3)
-    sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} ${Q3OrderByDropdown} AddressNumber DESC;`;
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} ${Q3OrderByDropdown} AddressNumber DESC;`;
+    else if (queryNo == 4)
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} and name ${Q4ConditionTypeDropdown2};`;
+    else if (queryNo == 5)
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where personID ${Q5ConditionTypeDropdown} ${Q5ConditionTypeDropdown2} personID ${Q5ConditionTypeDropdown3};`;
+    else if (queryNo == 6)
+      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where License_number ${Q6ConditionTypeDropdown};`;
+    else
+      sqlQuery = `${AttributeDropdown} P.ID, P.Name, P.gender, p.height, DL.License_number FROM ${FromDropdown} as ${alias1} ${joinDropDown} ${FromDropdown2} as DL
+      ${onDropDown} P.License_ID=${Q7ConditionTypeDropdown3}
+      WHERE DL.height = 6.0 and DL.License_number like '%NJ53%';`;
 
     console.log(sqlQuery);
     query(sqlQuery, function (result) {
