@@ -161,7 +161,7 @@ function displayResults(results, page) {
     // const pageData = results[0].values.slice(start, end);
 
     resultsData= results;
-    console.log(results[0])
+    // console.log(results[0])
     var startIndex = 0;
     var endIndex = Math.min(startIndex + itemsPerPage, results[0].values.length);
     var tableHTML = "<table class='table table-bordered mt-3'>";
