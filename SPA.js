@@ -6,8 +6,8 @@ mainContent.innerHTML = `
     <div class="col-md-6">
         <div class="card bg-light mb-3">
         <div class="card-body">
-            <p id="demo" class="card-text" data-text="SQL Mystery is a casual game where players learn and practice SQL by solving puzzles. In the game, players take on the role of a detective tasked with solving a series of mysteries by querying a database. To succeed, players must use their SQL skills to find clues, uncover hidden information, and identify patterns."></p>
-            <p class="text-danger text-center">Let's see how good you are at SQL</p>
+            <p id="demo" class="card-text" data-text="SQL Mystery is a game where players learn and practice SQL by solving a mystery. Take on the role of a detective to solve a mystery by querying a database. To succeed, you must use your SQL skills to find clues, uncover hidden information, and identify patterns."></p>
+            <p class="text-danger text-center">Let's see how good you are at SQL .</p>
             <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-success" onclick="loadStoryPage()">Go!</button>
             </div>
@@ -27,9 +27,9 @@ window.loadStoryPage = function() {
                 <div class="card bg-light mb-3">
                     <div class="card-body">
                         <div class="card-header">Story</div>
-                        <p id="demo" data-text="Adrian Bell, CTO of a large technology company was found to be missing after a Gala event on April 1st, 2023, prompting an urgent police investigation. As a Detective You are given access to the crime reports and other related databases to find the culprit."></p>
+                        <p id="demo" data-text="Adrian Bell, CTO of a large technology company was found to be missing after a gala event on April 1st, 2023, prompting an urgent police investigation. As a detective you are given access to the crime reports and other related databases to find the culprit."></p>
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-danger" onclick="loadHomePage()">Go Back</button>
+                            <button type="button" class="btn btn-success" onclick="loadHomePage()">Go Back</button>
                             <button type="button" class="btn btn-success" >
                             <a href="queries.html">GO!</a>
                             </button>

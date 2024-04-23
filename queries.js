@@ -64,7 +64,7 @@ window.Query = function (show) {
                 <div class="card-body">
                     ${
                       show == 1
-                        ? `<h5 class="card-title">Get the no of cases in the crime_report</h5>
+                        ? `<h5 class="card-title">Get the number of cases in the crime_report</h5>
                         `
                         : ""
                     }
@@ -98,7 +98,7 @@ window.Query = function (show) {
                         ? `<h5 class="card-title">Find the culprit.</h5>`
                         : ""
                     }
-                    <p>Select the options from the below represented dropdown to form a query</p>
+                    <p>Use the form to create  a query</p>
                     <div class="row" id="check1">
                         <div class="col-md-3 mb-3">
                             <select class="custom-select" id="AttributeDropdown">
@@ -376,12 +376,10 @@ function displayError(errorMessage) {
   const errorContainer = document.getElementById("errorContainer");
   let error = "Error:";
   if (errorMessage.includes(error)) error = "";
+  if (errorMessage.includes("wrong")) error = "";
   errorContainer.innerHTML = `
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong>${error}</strong> ${errorMessage}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     `;
 }
@@ -535,7 +533,7 @@ window.executeQuery = function (queryNo) {
       throw new Error("Please select options from the dropdowns");
     }
     if (queryNo == 1)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown}`;
+      sqlQuery = `${AttributeDropdown == "Select"? AttributeDropdown : "wrong"} ${StarDropdown == "count(*)"? StarDropdown : "wrong"} FROM ${FromDropdown == "crime_report"? FromDropdown : "wrong"}`;
     else if (queryNo == 2)
       sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
     else if (queryNo == 3)
@@ -551,14 +549,24 @@ window.executeQuery = function (queryNo) {
       ${onDropDown} P.License_ID=${Q7ConditionTypeDropdown3}
       WHERE DL.height = 6.0 and DL.License_number like '%NJ53%';`;
 
-    console.log(sqlQuery);
-    query(sqlQuery, function (result) {
-      displayResults(result, currentPage);
-      clearError();
-      displaySuccess("Query executed successfully", "successContainer");
+    if (sqlQuery.includes("wrong")) 
+    {
+      clearSuccess();
+      clearOutputAndGrid();
+      displayError("wrong answer");
+    }
+    else
+    {
+      console.log(sqlQuery);
+      query(sqlQuery, function (result) {
+        displayResults(result, currentPage);
+        clearError();
+        displaySuccess("Query executed successfully", "successContainer");
+  
+        document.getElementById("next1").disabled = false;
+      });
+    }
 
-      document.getElementById("next1").disabled = false;
-    });
   } catch (error) {
     clearSuccess();
     clearOutputAndGrid();
