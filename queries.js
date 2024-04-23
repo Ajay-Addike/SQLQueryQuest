@@ -102,7 +102,7 @@ window.Query = function (show) {
                     <div class="row" id="check1">
                         <div class="col-md-3 mb-3">
                             <select class="custom-select" id="AttributeDropdown">
-                                <option value="">Select SQL Query</option>
+                                <option value="">Choose Action</option>
                                 <option value="Select">Select</option>
                                 <option value="Delete">Delete</option>
                                 <option value="Insert">Insert</option>
@@ -112,7 +112,7 @@ window.Query = function (show) {
                           show != 7
                             ? `<div class="col-md-3 mb-3">
                             <select class="custom-select" id="FieldDropdown">
-                                <option value="">Select fields</option>
+                                <option value="">Fields</option>
                                 <option value="*">*</option>
                                 <option value="count(*)">count(*)</option>
                             </select>
@@ -120,13 +120,20 @@ window.Query = function (show) {
                             : `P.ID, P.Name, P.gender, p.height, DL.License_number`
                         }
                         
-                        FROM
+                        <div class="col-md-3 mb-3">
+                            <select class="custom-select" id="fromOptionDropdown">
+                                <option value="">Choose Action</option>
+                                <option value="Into">Into</option>
+                                <option value="From">From</option>
+                            </select>
+                        </div>
+
                         
                         ${
                           show == 5 || show == 6
                             ? `<div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown">
-                                  <option value="">Select attribute</option>
+                                  <option value="">Tables</option>
                                   <option value="Drivers_License">Drivers_License</option>
                                   <option value="interview">interview</option>
                                   <option value="person">person</option>
@@ -134,7 +141,7 @@ window.Query = function (show) {
                           </div>`
                             : `<div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown">
-                                  <option value="">Select attribute</option>
+                                  <option value="">Tables</option>
                                   <option value="crime_report">crime_report</option>
                                   <option value="location">location</option>
                                   <option value="person">person</option>
@@ -148,7 +155,7 @@ window.Query = function (show) {
                               as 
                                 <div class="col-md-3 mb-3">
                                     <select class="custom-select" id="alias1">
-                                        <option value="">Select attribute</option>
+                                        <option value="">Attributes</option>
                                         <option value="p">p</option>
                                         <option value="DL">DL</option>
                                         <option value="D">D</option>
@@ -156,7 +163,7 @@ window.Query = function (show) {
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <select class="custom-select" id="joinDropDown">
-                                        <option value="">Select attribute</option>
+                                        <option value="">Attributes</option>
                                         <option value="Inner Join">Inner Join</option>
                                         <option value="Outer Join">Outer Join</option>
                                         <option value="Left Join">Left Join</option>
@@ -164,7 +171,7 @@ window.Query = function (show) {
                                 </div>
                                 <div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown2">
-                                  <option value="">Select attribute</option>
+                                  <option value="">Tables</option>
                                   <option value="Drivers_License">Drivers_License</option>
                                   <option value="interview">interview</option>
                                   <option value="person">person</option>
@@ -173,7 +180,7 @@ window.Query = function (show) {
                                 as DL
                                 <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="onDropDown">
-                                    <option value="">Select attribute</option>
+                                    <option value="">Attributes</option>
                                     <option value="on">on</option>
                                     <option value="out">out</option>
                                     <option value="in">in</option>
@@ -487,6 +494,7 @@ window.executeQuery = function (queryNo) {
   const AttributeDropdown = document.getElementById("AttributeDropdown").value;
   const StarDropdown = document.getElementById("FieldDropdown")?.value || "fallbackValue";
   const FromDropdown = document.getElementById("FromDropdown").value;
+  const fromOptionDropdown = document.getElementById("fromOptionDropdown").value;
   const FromDropdown2 = document.getElementById("FromDropdown2")?.value || "fallbackValue";
 
   const Q2ConditionTypeDropdown =
@@ -528,12 +536,13 @@ window.executeQuery = function (queryNo) {
       !StarDropdown.trim() ||
       !FromDropdown.trim() ||
       !Q2ConditionTypeDropdown.trim() ||
-      !Q2ConditionCityDropdown2.trim()
+      !Q2ConditionCityDropdown2.trim() ||
+      !fromOptionDropdown
     ) {
       throw new Error("Please select options from the dropdowns");
     }
     if (queryNo == 1)
-      sqlQuery = `${AttributeDropdown == "Select"? AttributeDropdown : "wrong"} ${StarDropdown == "count(*)"? StarDropdown : "wrong"} FROM ${FromDropdown == "crime_report"? FromDropdown : "wrong"}`;
+      sqlQuery = `${AttributeDropdown == "Select"? AttributeDropdown : "wrong"} ${StarDropdown == "count(*)"? StarDropdown : "wrong"} ${fromOptionDropdown == "From"? fromOptionDropdown : "wrong"} ${FromDropdown == "crime_report"? FromDropdown : "wrong"}`;
     else if (queryNo == 2)
       sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
     else if (queryNo == 3)
