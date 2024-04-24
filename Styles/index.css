@@ -24,7 +24,10 @@ body {
   background-color: white;
   color: #000;
 }
-
+#myParagraph {
+    display: none; /* Paragraph is hidden by default */
+    
+  }
 .text-color{
     color: blue;
 }

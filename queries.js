@@ -78,32 +78,41 @@ window.Query = function (show, scoreUpdate) {
                     }
                     ${
                       show == 2
-                        ? `<h5 class="card-title text-success">Get the case related to Mr.Bell from the crime_report</h5>`
+                        ? `<h5 class="card-title text-success">Get the case related to Mr.Bell from the crime_report</h5>
+                        <button class="btn btn-warning" onclick="displayHint()">Hint !</button>
+                        <p id="myParagraph" class="text-info">We know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax City.</p>
+                        </br>`
                         : ""
                     }
                     ${
                       show == 3
-                        ? `<h5 class="card-title">Find the first witness details.</h5>`
+                        ? `
+                        <h5 class="card-title text-info">We Know that first witness lives at the last house on "Southwestern Dr".</h5>
+                        <h5 class="card-title text-success">Find the first witness details.</h5>`
                         : ""
                     }
                     ${
                       show == 4
-                        ? `<h5 class="card-title">Find the second witness details.</h5>`
+                        ? `
+                        <h5 class="card-title text-info">We Know that second witness john lives somewhere on "Hanks Ave".</h5>
+                        <h5 class="card-title text-success">Find the second witness details.</h5>`
                         : ""
                     }
                     ${
                       show == 5
-                        ? `<h5 class="card-title">Get Interview transcript.</h5>`
+                        ? `<h5 class="card-title text-info">ID of the First and Second witness are 15867 and 24663.</h5>
+                        <h5 class="card-title text-success">Get the interview transcripts.</h5>`
                         : ""
                     }
                     ${
                       show == 6
-                        ? `<h5 class="card-title">Get License Plate details.</h5>`
+                        ? `<h5 class="card-title text-success">Get License Plate details that include NJ53.</h5>`
                         : ""
                     }
                     ${
                       show == 7
-                        ? `<h5 class="card-title">Find the culprit.</h5>`
+                        ? `<h5 class="card-title text-info">We know that Andrian bell was being forcibly led into a black sedan by a person who's 6ft.</h5>
+                        <h5 class="card-title text-success">Find the culprit.</h5>`
                         : ""
                     }
                     <p>Use the form to create  a query</p>
@@ -218,7 +227,7 @@ window.Query = function (show, scoreUpdate) {
                                     <option value="">Choose Condition</option>
                                     <option value="=== '2023-04-01'">=== '2023-04-01'</option>
                                     <option value="= '2023-04-01'">= '2023-04-01'</option>
-                                    <option value="IN ('2023-04-01')">IN ('2023-04-01')</option>
+                                    <option value="NOT IN ('2023-04-01')">NOT IN ('2023-04-01')</option>
                                 </select>
                             </div>
                             and type =
@@ -229,7 +238,16 @@ window.Query = function (show, scoreUpdate) {
                                     <option value="'Robbery'">'Robbery'</option>
                                 </select>
                             </div>
-                            and city = 'Fairfax';
+                            and city =
+                            <div class="col-md-3 mb-3">
+                                <select class="custom-select" id="cityDropdown">
+                                    <option value="">Choose Condition</option>
+                                    <option value="'Fairfax'">'Fairfax'</option>
+                                    <option value="'NYC'">'NYC'</option>
+                                    <option value="'Richmond'">'Richmond'</option>
+                                </select>
+                                ;
+                            </div>
                             
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-success" onclick="executeQuery(2)">Run!</button>
@@ -283,10 +301,11 @@ window.Query = function (show, scoreUpdate) {
                               
                                <select class="custom-select" id="Q4ConditionTypeDropdown2">
                                    <option value="">Choose Condition</option>
-                                   <option value="like 'John%'">like 'John%'</option>
-                                   <option value="like = 'John'">like = 'John'</option>
-                                   <option value="like = 'John%'">like = 'John%'</option>
+                                   <option value="LIKE 'John%'">LIKE 'John%'</option>
+                                   <option value="LIKE = 'John'">LIKE = 'John'</option>
+                                   <option value="LIKE = 'John%'">LIKE = 'John%'</option>
                                </select>  
+                               ;
                                </div>
 
                                <div class="d-flex justify-content-end">
@@ -322,7 +341,7 @@ window.Query = function (show, scoreUpdate) {
                                     <option value="= 27663">= 27663</option>
                                     <option value="= 24663">= 24663</option>
                                     <option value="= 15867">= 15867</option>
-                                </select>
+                                </select>;
                             </div>
   
                                  <div class="d-flex justify-content-end">
@@ -338,9 +357,9 @@ window.Query = function (show, scoreUpdate) {
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q6ConditionTypeDropdown">
                                     <option value="">Choose Condition</option>
-                                    <option value="like '%NJ53%'">like '%NJ53%'</option>
-                                    <option value="like = '%NJ53%'">like = '%NJ53%'</option>
-                                    <option value="like = '%NJ533%'">like = '%NJ533%'</option>
+                                    <option value="LIKE '%NJ53%'">LIKE '%NJ53%'</option>
+                                    <option value="LIKE = '%NJ53%'">LIKE = '%NJ53%'</option>
+                                    <option value="LIKE = '%NJ533%'">LIKE = '%NJ533%'</option>
                                 </select>  
                             </div>
     
@@ -366,6 +385,7 @@ window.Query = function (show, scoreUpdate) {
 
                             <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-success" onclick="executeQuery(7)">Run!</button>
+                                    <button type="button" class="btn btn-success" onclick="exitPage(1)">Next!</button>
                                 </div>
                             `
                             : ""
@@ -439,6 +459,16 @@ function changePage(page) {
   displayResults(resultsData, page); // Call displayResults to show the updated page
 }
 
+function displayHint(no){
+  var paragraph = document.getElementById("myParagraph");
+  if (paragraph.style.display === "none") {
+    paragraph.style.display = "block";
+  } else {
+    paragraph.style.display = "none";
+  }
+
+}
+
 function query(sql, cb, err_cb) {
   if (err_cb) {
     worker.onerror = (e) => err_cb(e);
@@ -458,6 +488,21 @@ function query(sql, cb, err_cb) {
     action: "exec",
     sql: sql,
   });
+}
+
+function exitPage(scoreUpdate){
+  mainContent.innerHTML = `  <div class="row justify-content-center mt-4">
+  <div class="col-md-6">
+      <div class="card bg-light mb-3">
+          <div class="card-body">
+          <h5 class="card-title text-success">Congratulations you have reached the end!!
+          </h5>
+            </div>
+            </div>
+            </div>
+            </div>`;
+            score += scoreUpdate == undefined ? 0 : scoreUpdate;
+            document.getElementById("scoreContainer").innerText = score;
 }
 
 function displayResults(results, page) {
@@ -526,6 +571,9 @@ window.executeQuery = function (queryNo) {
   const FromDropdown = document.getElementById("FromDropdown").value;
   const fromOptionDropdown =
     document.getElementById("fromOptionDropdown").value;
+    const cityDropdown =
+    document.getElementById("cityDropdown")?.value || "fallbackValue";
+    
   const FromDropdown2 =
     document.getElementById("FromDropdown2")?.value || "fallbackValue";
 
@@ -589,18 +637,34 @@ window.executeQuery = function (queryNo) {
         fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
       } ${FromDropdown == "crime_report" ? FromDropdown : "wrong"}`;
     else if (queryNo == 2)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
+      sqlQuery = `${AttributeDropdown == "Select" ? AttributeDropdown : "wrong"} ${StarDropdown == "*" ? StarDropdown : "wrong"} ${fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"} ${FromDropdown == "crime_report" ? FromDropdown : "wrong"} where date ${Q2ConditionTypeDropdown == "= '2023-04-01'"?Q2ConditionTypeDropdown : "wrong"} and type = ${Q2ConditionCityDropdown2 == "'missing'"?Q2ConditionCityDropdown2: "wrong"} and city = ${cityDropdown == "'Fairfax'"?cityDropdown: "wrong"};`;
     else if (queryNo == 3)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} ${Q3OrderByDropdown} AddressNumber DESC;`;
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "person" ? FromDropdown : "wrong"} where AddressStreet ${Q3ConditionTypeDropdown == "= 'Southwestern Dr'"?Q3ConditionTypeDropdown: "wrong"} ${Q3OrderByDropdown == "ORDER BY"?Q3OrderByDropdown: "wrong"} AddressNumber DESC;`;
     else if (queryNo == 4)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where AddressStreet ${Q3ConditionTypeDropdown} and name ${Q4ConditionTypeDropdown2};`;
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "person" ? FromDropdown : "wrong"} where AddressStreet ${Q3ConditionTypeDropdown == "= 'Hanks Ave'"?Q3ConditionTypeDropdown: "wrong"} and name ${Q4ConditionTypeDropdown2 == "LIKE 'John%'"?Q4ConditionTypeDropdown2: "wrong"};`;
     else if (queryNo == 5)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where personID ${Q5ConditionTypeDropdown} ${Q5ConditionTypeDropdown2} personID ${Q5ConditionTypeDropdown3};`;
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "interview" ? FromDropdown : "wrong"} where personID ${Q5ConditionTypeDropdown == "= 15867"?Q5ConditionTypeDropdown : "wrong"} ${Q5ConditionTypeDropdown2 == "OR"?Q5ConditionTypeDropdown2: "wrong"} personID ${Q5ConditionTypeDropdown3 == "= 24663"?Q5ConditionTypeDropdown3: "wrong"};`;
     else if (queryNo == 6)
-      sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where License_number ${Q6ConditionTypeDropdown};`;
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "Drivers_License" ? FromDropdown : "wrong"} where License_number ${Q6ConditionTypeDropdown == "LIKE '%NJ53%'"?Q6ConditionTypeDropdown: "wrong"};`;
     else
-      sqlQuery = `${AttributeDropdown} P.ID, P.Name, P.gender, p.height, DL.License_number FROM ${FromDropdown} as ${alias1} ${joinDropDown} ${FromDropdown2} as DL
-      ${onDropDown} P.License_ID=${Q7ConditionTypeDropdown3}
+      sqlQuery = `${AttributeDropdown == "Select" ? AttributeDropdown : "wrong"} P.ID, P.Name, P.gender, p.height, DL.License_number ${fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"} ${FromDropdown == "person" ? FromDropdown : "wrong"} as ${alias1 == "p"?alias1:  "wrong"} ${joinDropDown == "Inner Join"?joinDropDown : "wrong"} ${FromDropdown2 == "Drivers_License"?FromDropdown2: "wrong"} as DL
+      ${onDropDown == "on"?onDropDown: "wrong"} P.License_ID=${Q7ConditionTypeDropdown3 == "= DL.ID"?Q7ConditionTypeDropdown3: "wrong"}
       WHERE DL.height = 6.0 and DL.License_number like '%NJ53%';`;
 
     if (sqlQuery.includes("wrong")) {

@@ -1,98 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Responsive Carousel</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <style>
-      .carousel-control-next,
-.carousel-control-prev /*, .carousel-indicators */ {
-        filter: invert(100%);
-      }
-      body{
-        background-color: white;
-        color: #000;
-      }
-    </style>
-  </head>
-
-  <body >
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12 text-center pb-5">
-          
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 offset-md-2">
-          <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="img/Table1.png" class="d-block w-100" alt="Slide 1" />
-              </div>
-
-              <div class="carousel-item">
-                <img src="img/Table2.png" class="d-block w-100" alt="Slide 2" />
-              </div>
-
-              <div class="carousel-item">
-                <img src="img/Table3.png" class="d-block w-100" alt="Slide 4" />
-              </div>
-
-              <div class="carousel-item">
-                <img src="img/Table4.png" class="d-block w-100" alt="Slide 3" />
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span class="carousel-control-prev-icon" aria-hidden="true">
-              </span>
-              <span class="visually-hidden"> Previous </span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span class="carousel-control-next-icon" aria-hidden="true">
-              </span>
-              <span class="visually-hidden"> Next </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<title>Button Example</title>
+<script>
+function displayParagraph() {
+  // This function toggles the display of the paragraph
+  var paragraph = document.getElementById("myParagraph");
+  if (paragraph.style.display === "none") {
+    paragraph.style.display = "block";
+  } else {
+    paragraph.style.display = "none";
+  }
+}
+</script>
+<style>
+  #myParagraph {
+    display: none; /* Paragraph is hidden by default */
+    color: #333;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+<button onclick="displayParagraph()">Click Me</button>
+<p id="myParagraph">This is the paragraph that appears when you click the button.</p>
+</body>
 </html>
-
-
-
-`<div class="col-md-3 mb-3">
-    <select class="custom-select" id="FromDropdown">
-        <option value="">Choose Table</option>
-        <option value="crime_report">crime_report</option>
-        <option value="location">location</option>
-        <option value="person">person</option>
-    </select>
-    ;
-</div>`
