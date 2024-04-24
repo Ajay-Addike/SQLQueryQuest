@@ -1,108 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Frontend Pagination</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Carousel</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
     <style>
-        #dataContainer div {
-            padding: 8px;
-            margin: 5px;
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-        }
-        #controls {
-            margin-top: 20px;
-        }
-        button {
-            margin-right: 5px;
-            padding: 5px 10px;
-        }
-        #pageInfo {
-            margin: 0 15px;
-        }
+      .carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+        filter: invert(100%);
+      }
+      body{
+        background-color: white;
+        color: #000;
+      }
     </style>
-</head>
-<body>
-    <div id="dataContainer"></div>
-    <div id="controls">
-        <button id="prevButton">Previous</button>
-        <span id="pageInfo"></span>
-        <button id="nextButton">Next</button>
+  </head>
+
+  <body >
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-12 text-center pb-5">
+          
+        </div>
+      </div>
     </div>
-    <script>
-        window.query2 = function () {
-  mainContent.innerHTML = `
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-6">
-            <div class="card bg-light mb-3">
-                <div class="card-body">
-                    <p>Get all records from the crime_report.</p>
 
-                    <div class="row" id="check2">
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="AttributeDropdown">
-                                <option value="">Select SQL Query</option>
-                                <option value="Select">Select</option>
-                                <option value="Delete">Delete</option>
-                                <option value="Insert">Insert</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="FieldDropdown">
-                                <option value="">Select fields</option>
-                                <option value="*">*</option>
-                                <option value="count(*)">count(*)</option>
-                            </select>
-                        </div>
-                        FROM
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="FromDropdown">
-                                <option value="">Select attribute</option>
-                                <option value="crime_report">crime_report</option>
-                                <option value="location">location</option>
-                                <option value="person">person</option>
-                            </select>
-                        </div>
-                        where date
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="Q2ConditionTypeDropdown">
-                                <option value="">Select Condition</option>
-                                <option value="IS '2023-04-01'">IS '2023-04-01'</option>
-                                <option value="= '2023-04-01'">= '2023-04-01'</option>
-                                <option value="IN ('2023-04-01')">IN ('2023-04-01')</option>
-                            </select>
-                        </div>
-                        and type =
-                        <div class="col-md-3 mb-3">
-                            <select class="custom-select" id="Q2ConditionCityDropdown2">
-                                <option value="">Select Condition 2</option>
-                                <option value="'missing'">'missing'</option>
-                                <option value="'Robbery'">'Robbery'</option>
-                            </select>
-                        </div>
-                        and city = 'Fairfax';
-                    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/Table1.png" class="d-block w-100" alt="Slide 1" />
+              </div>
 
+              <div class="carousel-item">
+                <img src="img/Table2.png" class="d-block w-100" alt="Slide 2" />
+              </div>
 
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-success" onclick="executeQuery1(2)">Run!</button>
-                        <button  id="next1" class="btn btn-primary" disabled onclick="query3()">Next Question</button>
-                    </div>
-                    <div class="row mt-3">
-                    <div id="errorContainer"></div>
-                    <div id="successContainer"></div>
-                </div>
-                </div>
+              <div class="carousel-item">
+                <img src="img/Table3.png" class="d-block w-100" alt="Slide 4" />
+              </div>
+
+              <div class="carousel-item">
+                <img src="img/Table4.png" class="d-block w-100" alt="Slide 3" />
+              </div>
             </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true">
+              </span>
+              <span class="visually-hidden"> Previous </span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true">
+              </span>
+              <span class="visually-hidden"> Next </span>
+            </button>
+          </div>
         </div>
-        <div class="container mt-5">
-            <div id="outputContainer" class="text-center"></div>
-            <div id="gridPagination" class="pagination-container"></div>
-        </div>
+      </div>
     </div>
-    `;
-};
 
-    </script>
-</body>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

@@ -1,19 +1,26 @@
-body{
-    background-color: white;
+body {
+  background-color: white;
 }
-.navbar-brand
-{
-    font-size: 30px;
+.navbar-brand {
+  font-size: 30px;
 }
-.card-header{
-    text-align: center;
-    font-size: 30px;
+.card-header {
+  text-align: center;
+  font-size: 30px;
 }
-.card-text{
-    text-align: justify;
-    font-size: 25px;
+.card-text {
+  text-align: justify;
+  font-size: 25px;
 }
 .navbar {
+  border-radius: 0px;
+}
 
-	border-radius: 0px;
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+  filter: invert(100%);
+}
+body {
+  background-color: white;
+  color: #000;
 }
