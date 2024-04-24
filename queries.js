@@ -563,6 +563,7 @@ function displaySuccess(successMessage, containerId) {
 }
 
 window.executeQuery = function (queryNo) {
+  currentPage = 1;
   let sqlQuery = "";
   const AttributeDropdown = document.getElementById("AttributeDropdown").value;
   const StarDropdown =
