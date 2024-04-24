@@ -295,7 +295,7 @@ window.Query = function (show, scoreUpdate) {
                               </select>
                           </div>
                           <div class="col-md-3 mb-3">
-                          name
+                          AND Name
                           </div>
                               <div class="col-md-3 mb-3">
                               
@@ -317,7 +317,7 @@ window.Query = function (show, scoreUpdate) {
                         }
                         ${
                           show == 5
-                            ? ` WHERE person ID
+                            ? ` WHERE personID
                                 <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q5ConditionTypeDropdown">
                                     <option value="">Choose Condition</option>
@@ -353,7 +353,7 @@ window.Query = function (show, scoreUpdate) {
                         }
                         ${
                           show == 6
-                            ? ` WHERE License Number
+                            ? ` WHERE License_number
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q6ConditionTypeDropdown">
                                     <option value="">Choose Condition</option>
