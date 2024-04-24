@@ -64,7 +64,10 @@ window.Query = function (show) {
                 <div class="card-body">
                     ${
                       show == 1
-                        ? `<h5 class="card-title">Get the number of cases in the crime_report</h5>
+                        ? `<h5 class="card-title text-info">As you just saw the Reports and other tables in the DataBase.</h5>
+                        <h5 class="card-title text-info">Now, let's start by analyzing the crime_report.</h5>
+                        </br>
+                        <h5 class="card-title text-success">Get the number of cases in the crime_report.</h5>
                         `
                         : ""
                     }
@@ -112,7 +115,7 @@ window.Query = function (show) {
                           show != 7
                             ? `<div class="col-md-3 mb-3">
                             <select class="custom-select" id="FieldDropdown">
-                                <option value="">Fields</option>
+                                <option value="">Choose Field</option>
                                 <option value="*">*</option>
                                 <option value="count(*)">count(*)</option>
                             </select>
@@ -133,20 +136,31 @@ window.Query = function (show) {
                           show == 5 || show == 6
                             ? `<div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown">
-                                  <option value="">Tables</option>
+                                  <option value="">Choose Table</option>
                                   <option value="Drivers_License">Drivers_License</option>
                                   <option value="interview">interview</option>
                                   <option value="person">person</option>
                               </select>
                           </div>`
-                            : `<div class="col-md-3 mb-3">
+                            : 
+                            show == 1 ?
+                            `<div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown">
-                                  <option value="">Tables</option>
+                                  <option value="">Choose Table</option>
                                   <option value="crime_report">crime_report</option>
                                   <option value="location">location</option>
                                   <option value="person">person</option>
                               </select>
-                          </div>`
+                              ;
+                            </div>` 
+                          : `<div class="col-md-3 mb-3">
+                                <select class="custom-select" id="FromDropdown">
+                                    <option value="">Choose Table</option>
+                                    <option value="crime_report">crime_report</option>
+                                    <option value="location">location</option>
+                                    <option value="person">person</option>
+                                </select>
+                            </div>`
                         }
 
                         ${
@@ -155,7 +169,7 @@ window.Query = function (show) {
                               as 
                                 <div class="col-md-3 mb-3">
                                     <select class="custom-select" id="alias1">
-                                        <option value="">Attributes</option>
+                                        <option value="">Choose Attribute</option>
                                         <option value="p">p</option>
                                         <option value="DL">DL</option>
                                         <option value="D">D</option>
@@ -163,7 +177,7 @@ window.Query = function (show) {
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <select class="custom-select" id="joinDropDown">
-                                        <option value="">Attributes</option>
+                                        <option value="">Choose Attribute</option>
                                         <option value="Inner Join">Inner Join</option>
                                         <option value="Outer Join">Outer Join</option>
                                         <option value="Left Join">Left Join</option>
@@ -171,7 +185,7 @@ window.Query = function (show) {
                                 </div>
                                 <div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown2">
-                                  <option value="">Tables</option>
+                                  <option value="">Choose Table</option>
                                   <option value="Drivers_License">Drivers_License</option>
                                   <option value="interview">interview</option>
                                   <option value="person">person</option>
@@ -180,7 +194,7 @@ window.Query = function (show) {
                                 as DL
                                 <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="onDropDown">
-                                    <option value="">Attributes</option>
+                                    <option value="">Choose Attribute</option>
                                     <option value="on">on</option>
                                     <option value="out">out</option>
                                     <option value="in">in</option>
@@ -197,8 +211,8 @@ window.Query = function (show) {
                             ? `where date
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q2ConditionTypeDropdown">
-                                    <option value="">Select Condition</option>
-                                    <option value="IS '2023-04-01'">IS '2023-04-01'</option>
+                                    <option value="">Choose Condition</option>
+                                    <option value="=== '2023-04-01'">=== '2023-04-01'</option>
                                     <option value="= '2023-04-01'">= '2023-04-01'</option>
                                     <option value="IN ('2023-04-01')">IN ('2023-04-01')</option>
                                 </select>
@@ -206,7 +220,7 @@ window.Query = function (show) {
                             and type =
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q2ConditionCityDropdown2">
-                                    <option value="">Select Condition 2</option>
+                                    <option value="">Choose Condition</option>
                                     <option value="'missing'">'missing'</option>
                                     <option value="'Robbery'">'Robbery'</option>
                                 </select>
@@ -225,7 +239,7 @@ window.Query = function (show) {
                             ? `   WHERE AddressStreet
                               <div class="col-md-3 mb-3">
                                   <select class="custom-select" id="Q3ConditionTypeDropdown">
-                                      <option value="">Select Condition</option>
+                                      <option value="">Choose Condition</option>
                                       <option value="IN 'Southwestern Dr'">IN 'Southwestern Dr'</option>
                                       <option value="= 'Hanks Ave'">= 'Hanks Ave'</option>
                                       <option value="= 'Southwestern Dr'">= 'Southwestern Dr'</option>
@@ -233,7 +247,7 @@ window.Query = function (show) {
                               </div>
                               <div class="col-md-3 mb-3">
                                   <select class="custom-select" id="Q3OrderByDropdown">
-                                      <option value="">Select CLAUSE</option>
+                                      <option value="">Choose Clause</option>
                                       <option value="ORDER BY">ORDER BY</option>
                                       <option value="GROUP BY ">GROUP BY</option>
                                       <option value="AND">AND</option>
@@ -252,7 +266,7 @@ window.Query = function (show) {
                             ? ` WHERE AddressStreet
                               <div class="col-md-3 mb-3">
                               <select class="custom-select" id="Q3ConditionTypeDropdown">
-                                  <option value="">Select Condition</option>
+                                  <option value="">Choose Condition</option>
                                   <option value="IN 'Southwestern Dr'">IN 'Southwestern Dr'</option>
                                   <option value="= 'Hanks Ave'">= 'Hanks Ave'</option>
                                   <option value="= 'Southwestern Dr'">= 'Southwestern Dr'</option>
@@ -264,7 +278,7 @@ window.Query = function (show) {
                               <div class="col-md-3 mb-3">
                               
                                <select class="custom-select" id="Q4ConditionTypeDropdown2">
-                                   <option value="">Select Condition</option>
+                                   <option value="">Choose Condition</option>
                                    <option value="like 'John%'">like 'John%'</option>
                                    <option value="like = 'John'">like = 'John'</option>
                                    <option value="like = 'John%'">like = 'John%'</option>
@@ -283,7 +297,7 @@ window.Query = function (show) {
                             ? ` WHERE person ID
                                 <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q5ConditionTypeDropdown">
-                                    <option value="">Select Condition</option>
+                                    <option value="">Choose Condition</option>
                                     <option value="= 13867">= 13867</option>
                                     <option value="= 14867">= 14867</option>
                                     <option value="= 15867">= 15867</option>
@@ -291,7 +305,7 @@ window.Query = function (show) {
                             </div>
                             <div class="col-md-3 mb-3">
                                  <select class="custom-select" id="Q5ConditionTypeDropdown2">
-                                     <option value="">Select Condition</option>
+                                     <option value="">Choose Condition</option>
                                      <option value="AND">AND</option>
                                      <option value="OR">OR</option>
                                      <option value="NOT">NOT</option>
@@ -300,7 +314,7 @@ window.Query = function (show) {
                             personID
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q5ConditionTypeDropdown3">
-                                    <option value="">Select Condition</option>
+                                    <option value="">Choose Condition</option>
                                     <option value="= 27663">= 27663</option>
                                     <option value="= 24663">= 24663</option>
                                     <option value="= 15867">= 15867</option>
@@ -319,7 +333,7 @@ window.Query = function (show) {
                             ? ` WHERE License Number
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q6ConditionTypeDropdown">
-                                    <option value="">Select Condition</option>
+                                    <option value="">Choose Condition</option>
                                     <option value="like '%NJ53%'">like '%NJ53%'</option>
                                     <option value="like = '%NJ53%'">like = '%NJ53%'</option>
                                     <option value="like = '%NJ533%'">like = '%NJ533%'</option>
@@ -338,7 +352,7 @@ window.Query = function (show) {
                             ? ` 
                             <div class="col-md-3 mb-3">
                                 <select class="custom-select" id="Q7ConditionTypeDropdown3">
-                                    <option value="">Select Condition</option>
+                                    <option value="">Choose Condition</option>
                                     <option value="= DL.ID">= DL.ID</option>
                                     <option value="= p.ID">= p.ID</option>
                                     <option value="= D.ID">= D.ID</option>
