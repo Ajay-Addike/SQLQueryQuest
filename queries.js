@@ -52,11 +52,11 @@ function next1(No) {
   //     </div>
   //     `;
   // }
-  score += 1;
-  document.getElementById("scoreContainer").innerText = score;
+  // score += 1;
+  // document.getElementById("scoreContainer").innerText = score;
 }
 
-window.Query = function (show) {
+window.Query = function (show, scoreUpdate) {
   mainContent.innerHTML = `
     <div class="row justify-content-center mt-4">
         <div class="col-md-6">
@@ -72,8 +72,13 @@ window.Query = function (show) {
                         : ""
                     }
                     ${
+                      show == 1.2
+                        ? ` <h5 class="card-title text-success">Get all the cases in the crime_report.</h5>`
+                        : ``
+                    }
+                    ${
                       show == 2
-                        ? `<h5 class="card-title">Get all records from the crime_report</h5>`
+                        ? `<h5 class="card-title text-success">Get the case related to Mr.Bell from the crime_report</h5>`
                         : ""
                     }
                     ${
@@ -142,9 +147,8 @@ window.Query = function (show) {
                                   <option value="person">person</option>
                               </select>
                           </div>`
-                            : 
-                            show == 1 ?
-                            `<div class="col-md-3 mb-3">
+                            : show == 1
+                            ? `<div class="col-md-3 mb-3">
                               <select class="custom-select" id="FromDropdown">
                                   <option value="">Choose Table</option>
                                   <option value="crime_report">crime_report</option>
@@ -152,8 +156,8 @@ window.Query = function (show) {
                                   <option value="person">person</option>
                               </select>
                               ;
-                            </div>` 
-                          : `<div class="col-md-3 mb-3">
+                            </div>`
+                            : `<div class="col-md-3 mb-3">
                                 <select class="custom-select" id="FromDropdown">
                                     <option value="">Choose Table</option>
                                     <option value="crime_report">crime_report</option>
@@ -229,7 +233,7 @@ window.Query = function (show) {
                             
                             <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-success" onclick="executeQuery(2)">Run!</button>
-                                <button  id="next1" class="btn btn-primary" disabled onclick="Query(3)">Next Question</button>
+                                <button  id="next1" class="btn btn-primary" disabled onclick="Query(3,1)">Next Question</button>
                             </div>
                             `
                             : ""
@@ -257,7 +261,7 @@ window.Query = function (show) {
                               
                               <div class="d-flex justify-content-end">
                               <button type="button" class="btn btn-success" onclick="executeQuery(3)">Run!</button>
-                              <button  id="next1" class="btn btn-primary" disabled onclick="Query(4)">Next Question</button>
+                              <button  id="next1" class="btn btn-primary" disabled onclick="Query(4,1)">Next Question</button>
                           </div>`
                             : ""
                         }
@@ -287,7 +291,7 @@ window.Query = function (show) {
 
                                <div class="d-flex justify-content-end">
                                <button type="button" class="btn btn-success" onclick="executeQuery(4)">Run!</button>
-                               <button  id="next1" class="btn btn-primary" disabled onclick="Query(5)">Next Question</button>
+                               <button  id="next1" class="btn btn-primary" disabled onclick="Query(5,1)">Next Question</button>
                            </div>
                                 `
                             : ""
@@ -323,7 +327,7 @@ window.Query = function (show) {
   
                                  <div class="d-flex justify-content-end">
                                  <button type="button" class="btn btn-success" onclick="executeQuery(5)">Run!</button>
-                                 <button  id="next1" class="btn btn-primary" disabled onclick="Query(6)">Next Question</button>
+                                 <button  id="next1" class="btn btn-primary" disabled onclick="Query(6,1)">Next Question</button>
                              </div>
                                   `
                             : ""
@@ -342,7 +346,7 @@ window.Query = function (show) {
     
                                 <div class="d-flex justify-content-end">
                                     <button type="button" class="btn btn-success" onclick="executeQuery(6)">Run!</button>
-                                    <button  id="next1" class="btn btn-primary" disabled onclick="Query(7)">Next Question</button>
+                                    <button  id="next1" class="btn btn-primary" disabled onclick="Query(7,1)">Next Question</button>
                                 </div>
                                     `
                             : ""
@@ -373,11 +377,19 @@ window.Query = function (show) {
                       show == 1
                         ? `<div class="d-flex justify-content-end">
                         <button type="button" class="btn btn-success" onclick="executeQuery(1)">Run!</button>
-                        <button  id="next1" class="btn btn-primary" disabled onclick="next1(2)">Next Question</button>
+                        <button  id="next1" class="btn btn-primary" disabled onclick="Query(1.2,1)">Next Question</button>
                     </div>`
-                        : ""
+                        : ``
                     }
-                    
+                    ${
+                      show == 1.2
+                        ? `<div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-success" onclick="executeQuery(1.2)">Run!</button>
+                        <button  id="next1" class="btn btn-primary" disabled onclick="Query(2,1)">Next Question</button>
+                    </div>`
+                        : ``
+                    }
+
                     <div class="row mt-3">
                     <div id="errorContainer"></div>
                     <div id="successContainer"></div>
@@ -391,6 +403,9 @@ window.Query = function (show) {
         </div>
     </div>
     `;
+
+  score += scoreUpdate == undefined ? 0 : scoreUpdate;
+  document.getElementById("scoreContainer").innerText = score;
 };
 
 function displayError(errorMessage) {
@@ -446,7 +461,7 @@ function query(sql, cb, err_cb) {
 }
 
 function displayResults(results, page) {
-  itemsPerPage = 3;
+  itemsPerPage = 5;
   const start = (page - 1) * itemsPerPage;
   // const end = page * itemsPerPage;
   const end = Math.min(page * itemsPerPage, results[0].values.length);
@@ -506,10 +521,13 @@ function displaySuccess(successMessage, containerId) {
 window.executeQuery = function (queryNo) {
   let sqlQuery = "";
   const AttributeDropdown = document.getElementById("AttributeDropdown").value;
-  const StarDropdown = document.getElementById("FieldDropdown")?.value || "fallbackValue";
+  const StarDropdown =
+    document.getElementById("FieldDropdown")?.value || "fallbackValue";
   const FromDropdown = document.getElementById("FromDropdown").value;
-  const fromOptionDropdown = document.getElementById("fromOptionDropdown").value;
-  const FromDropdown2 = document.getElementById("FromDropdown2")?.value || "fallbackValue";
+  const fromOptionDropdown =
+    document.getElementById("fromOptionDropdown").value;
+  const FromDropdown2 =
+    document.getElementById("FromDropdown2")?.value || "fallbackValue";
 
   const Q2ConditionTypeDropdown =
     document.getElementById("Q2ConditionTypeDropdown")?.value ||
@@ -538,11 +556,14 @@ window.executeQuery = function (queryNo) {
     document.getElementById("Q6ConditionTypeDropdown")?.value ||
     "fallbackValue";
   const alias1 = document.getElementById("alias1")?.value || "fallbackValue";
-  const onDropDown = document.getElementById("onDropDown")?.value || "fallbackValue";
-  const joinDropDown = document.getElementById("joinDropDown")?.value || "fallbackValue";
+  const onDropDown =
+    document.getElementById("onDropDown")?.value || "fallbackValue";
+  const joinDropDown =
+    document.getElementById("joinDropDown")?.value || "fallbackValue";
 
-  const Q7ConditionTypeDropdown3 = document.getElementById("Q7ConditionTypeDropdown3")?.value || "fallbackValue";
-
+  const Q7ConditionTypeDropdown3 =
+    document.getElementById("Q7ConditionTypeDropdown3")?.value ||
+    "fallbackValue";
 
   try {
     if (
@@ -556,7 +577,17 @@ window.executeQuery = function (queryNo) {
       throw new Error("Please select options from the dropdowns");
     }
     if (queryNo == 1)
-      sqlQuery = `${AttributeDropdown == "Select"? AttributeDropdown : "wrong"} ${StarDropdown == "count(*)"? StarDropdown : "wrong"} ${fromOptionDropdown == "From"? fromOptionDropdown : "wrong"} ${FromDropdown == "crime_report"? FromDropdown : "wrong"}`;
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "count(*)" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "crime_report" ? FromDropdown : "wrong"}`;
+    else if (queryNo == 1.2)
+      sqlQuery = `${
+        AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
+      } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
+        fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
+      } ${FromDropdown == "crime_report" ? FromDropdown : "wrong"}`;
     else if (queryNo == 2)
       sqlQuery = `${AttributeDropdown} ${StarDropdown} FROM ${FromDropdown} where date ${Q2ConditionTypeDropdown} and type = ${Q2ConditionCityDropdown2} and city = 'Fairfax';`;
     else if (queryNo == 3)
@@ -572,24 +603,20 @@ window.executeQuery = function (queryNo) {
       ${onDropDown} P.License_ID=${Q7ConditionTypeDropdown3}
       WHERE DL.height = 6.0 and DL.License_number like '%NJ53%';`;
 
-    if (sqlQuery.includes("wrong")) 
-    {
+    if (sqlQuery.includes("wrong")) {
       clearSuccess();
       clearOutputAndGrid();
       displayError("wrong answer");
-    }
-    else
-    {
+    } else {
       console.log(sqlQuery);
       query(sqlQuery, function (result) {
         displayResults(result, currentPage);
         clearError();
         displaySuccess("Query executed successfully", "successContainer");
-  
+
         document.getElementById("next1").disabled = false;
       });
     }
-
   } catch (error) {
     clearSuccess();
     clearOutputAndGrid();
