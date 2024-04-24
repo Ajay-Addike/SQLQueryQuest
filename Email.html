@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="css/owl.carousel.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="css/animate.css"/>
-
+    <link rel="stylesheet" href="Styles/bootstrap.min.css">
+    <link rel="stylesheet" href="Styles/index.css">
     <style>
         /* Custom CSS for centering text */
         .hero-section .hs-text .container {
@@ -26,13 +27,13 @@
         } 
         .custom-button 
         {
-            background-color: #ffb320; /* Blue */
+            background-color: #45a049; /* Blue */
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            color: black;
+            color: white;
             display: none;
         }
         /* Additional CSS for centering the form heading */
@@ -67,8 +68,8 @@
             box-sizing: border-box;
         }
         input[type="submit"] {
-            background-color: #ffb320;
-            color: black;
+            background-color: #45a049;
+            color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
@@ -88,7 +89,7 @@
 
                 <div class="container">
                     <form id="submissionForm" action="https://formspree.io/f/mzbnrvew" method="POST">
-                        <h3 class="form-heading">Please fill out the Form below to start Playing</h3> <!-- Added heading -->
+                        <!-- <h3 class="form-heading">Start your investigation.</h3> Added heading -->
 
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -96,10 +97,7 @@
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required>
                 
-                        <label for="idNo">ID No:</label>
-                        <input type="text" id="idNo" name="idNo" required>
-                
-                        <input id="submitFormField" type="submit" value="Submit">
+                        <input id="submitFormField" type="submit" value="Start Investigation">
                  
                         <button id="playGameButton" class="custom-button">
                             <a href="queries.html">Play the game</a>
@@ -151,6 +149,7 @@
 });
 
     </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         
 </body>
 </html>

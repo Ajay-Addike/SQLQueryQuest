@@ -6,8 +6,8 @@ window.loadHomePage = function () {
     <div class="col-md-6">
         <div class="card bg-light mb-3">
         <div class="card-body">
-            <p id="demo" class="card-text" data-text="SQL Mystery is a game where players learn and practice SQL by solving a mystery. Take on the role of a detective to solve a mystery by querying a database. To succeed, you must use your SQL skills to find clues, uncover hidden information, and identify patterns."></p>
-            <p class="text-danger text-center">Let's see how good you are at SQL .</p>
+            <p id="demo" class="card-text" data-text="SQL Mystery is a game where players learn and practice SQL by solving a mystery. Take on the role of a detective to solve the case  by querying a database. To succeed, you must use your SQL skills to find clues, uncover hidden information, and identify patterns."></p>
+            <p class="text-danger text-center">Let's see how good you are at SQL.</p>
             <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-success" onclick="loadStoryPage()">Go!</button>
             </div>
@@ -27,7 +27,7 @@ window.loadStoryPage = function () {
                 <div class="card bg-light mb-3">
                     <div class="card-body">
                         <div class="card-header">Story</div>
-                        <p id="demo" class="card-text" data-text="Adrian Bell, the CTO of a large technology company, was found to be missing after a gala event on April 1st, 2023, prompting an urgent police investigation. It has been three weeks, and there is no clue about Mr. Bell's whereabouts. The police have escalated the case to you. As a detective, you are now given access to the crime reports and other related databases to find the culprit."></p>
+                        <p id="demo" class="card-text" data-text="Adrian Bell, the CTO of a large technology company, was found to be missing after a gala event on April 1st, 2023, prompting an urgent police investigation. It has been three weeks, and there are no leads about Mr. Bell's whereabouts. The police have escalated the case to you. As a detective, you are now given access to the crime reports and other related information to find the culprit."></p>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-success" onclick="loadHomePage()">Go Back</button>
                             <button type="button" class="btn btn-success" onclick="loadReportsPage()">

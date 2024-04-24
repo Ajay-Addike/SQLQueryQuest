@@ -64,23 +64,21 @@ window.Query = function (show, scoreUpdate) {
                 <div class="card-body">
                     ${
                       show == 1
-                        ? `<h5 class="card-title text-info">As you just saw the Reports and other tables in the DataBase.</h5>
-                        <h5 class="card-title text-info">Now, let's start by analyzing the crime_report.</h5>
-                        </br>
-                        <h5 class="card-title text-success">Get the number of cases in the crime_report.</h5>
+                        ? `
+                        <h5 class="card-title text-success">Get the number of cases in the CRIME_REPORT.</h5>
                         `
                         : ""
                     }
                     ${
                       show == 1.2
-                        ? ` <h5 class="card-title text-success">Get all the cases in the crime_report.</h5>`
+                        ? ` <h5 class="card-title text-success">Get all the cases in the CRIME_REPORT.</h5>`
                         : ``
                     }
                     ${
                       show == 2
-                        ? `<h5 class="card-title text-success">Get the case related to Mr.Bell from the crime_report</h5>
+                        ? `<h5 class="card-title text-success">Get the case related to Mr.Bell from the CRIME_REPORT.</h5>
                         <button class="btn btn-warning" onclick="displayHint()">Hint !</button>
-                        <p id="myParagraph" class="text-info">We know from the story that Mr.Bell went missing on 2023-04-01 in Fairfax City.</p>
+                        <p id="myParagraph" class="text-info">Remember, Mr.Bell went missing on 2023-04-01 in Fairfax City..</p>
                         </br>`
                         : ""
                     }
@@ -157,19 +155,20 @@ window.Query = function (show, scoreUpdate) {
                               </select>
                           </div>`
                             : show == 1
-                            ? `<div class="col-md-3 mb-3">
-                              <select class="custom-select" id="FromDropdown">
-                                  <option value="">Choose Table</option>
-                                  <option value="crime_report">crime_report</option>
-                                  <option value="location">location</option>
-                                  <option value="person">person</option>
-                              </select>
-                              ;
-                            </div>`
+                            ? `<div class="col-md-3 mb-3" style="display: flex; align-items: center;">
+                            <select class="custom-select" id="FromDropdown">
+                                <option value="">Choose Table</option>
+                                <option value="CRIME_REPORT">CRIME_REPORT</option>
+                                <option value="location">location</option>
+                                <option value="person">person</option>
+                            </select>
+                            <div style="margin-left: 7px;">;</div>
+                        </div>
+                        `
                             : `<div class="col-md-3 mb-3">
                                 <select class="custom-select" id="FromDropdown">
                                     <option value="">Choose Table</option>
-                                    <option value="crime_report">crime_report</option>
+                                    <option value="CRIME_REPORT">CRIME_REPORT</option>
                                     <option value="location">location</option>
                                     <option value="person">person</option>
                                 </select>
@@ -629,15 +628,15 @@ window.executeQuery = function (queryNo) {
         AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
       } ${StarDropdown == "count(*)" ? StarDropdown : "wrong"} ${
         fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
-      } ${FromDropdown == "crime_report" ? FromDropdown : "wrong"}`;
+      } ${FromDropdown == "CRIME_REPORT" ? FromDropdown : "wrong"}`;
     else if (queryNo == 1.2)
       sqlQuery = `${
         AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
       } ${StarDropdown == "*" ? StarDropdown : "wrong"} ${
         fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"
-      } ${FromDropdown == "crime_report" ? FromDropdown : "wrong"}`;
+      } ${FromDropdown == "CRIME_REPORT" ? FromDropdown : "wrong"}`;
     else if (queryNo == 2)
-      sqlQuery = `${AttributeDropdown == "Select" ? AttributeDropdown : "wrong"} ${StarDropdown == "*" ? StarDropdown : "wrong"} ${fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"} ${FromDropdown == "crime_report" ? FromDropdown : "wrong"} where date ${Q2ConditionTypeDropdown == "= '2023-04-01'"?Q2ConditionTypeDropdown : "wrong"} and type = ${Q2ConditionCityDropdown2 == "'missing'"?Q2ConditionCityDropdown2: "wrong"} and city = ${cityDropdown == "'Fairfax'"?cityDropdown: "wrong"};`;
+      sqlQuery = `${AttributeDropdown == "Select" ? AttributeDropdown : "wrong"} ${StarDropdown == "*" ? StarDropdown : "wrong"} ${fromOptionDropdown == "From" ? fromOptionDropdown : "wrong"} ${FromDropdown == "CRIME_REPORT" ? FromDropdown : "wrong"} where date ${Q2ConditionTypeDropdown == "= '2023-04-01'"?Q2ConditionTypeDropdown : "wrong"} and type = ${Q2ConditionCityDropdown2 == "'missing'"?Q2ConditionCityDropdown2: "wrong"} and city = ${cityDropdown == "'Fairfax'"?cityDropdown: "wrong"};`;
     else if (queryNo == 3)
       sqlQuery = `${
         AttributeDropdown == "Select" ? AttributeDropdown : "wrong"
