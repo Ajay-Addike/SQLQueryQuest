@@ -95,7 +95,7 @@ window.loadReportsPage = function () {
     <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-success" onclick="loadStoryPage()">Go Back</button>
                             <button type="button" class="btn btn-success">
-                            <a href="Email.html">
+                            <a href="queries.html">
                             Go!
                             </a>
                             </button>
